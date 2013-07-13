@@ -1,0 +1,17 @@
+﻿@model Offshore3.BugTrack.ViewModels.PageViewModel
+
+<div class="pagination pagination-centered">
+    <ul>
+        @for (int i = 1; i <= Model.Pages; i++)
+        {
+            if (Model.Page == i)
+            {
+                <li><span>@i</span></li>
+            }
+            else
+            {
+                <li><a href="#" class="anchorPage">@i</a></li>
+            }
+        }
+    </ul>
+</div>

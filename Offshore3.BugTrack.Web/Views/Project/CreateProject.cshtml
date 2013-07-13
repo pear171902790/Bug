@@ -1,0 +1,72 @@
+﻿@model Offshore3.BugTrack.ViewModels.CreateProjectViewModel
+@{
+    ViewBag.Title = "CreateProject";
+}
+
+
+
+<form class="form-horizontal">
+    <div id="CreateProject">
+        <div class="control-group">
+            @Html.LabelFor(m => m.ProjectName, new {@class = "control-label"})
+            <div class="controls">
+                <input type="text" class="easyui-validatebox" 
+                    id="ProjectName" name="ProjectName"
+                    required="true"/>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Description, new {@class = "control-label"})
+            <div class="controls">
+                @Html.TextAreaFor(m => m.Description)
+            </div>
+        </div>
+        <hr />
+                <div>
+                    <a class="btn lBtn" id="btnSubmit">Submit</a>
+                    <a class="btn rBtn" href="@Url.Action("Index", "Project")">Cancel</a>
+                </div>
+    </div>
+</form>
+<style>
+    #CreateProject {
+        margin-left: auto;
+        margin-right: auto;
+        width: 500px;
+        border: 1px solid grey;
+        padding-top: 40px;
+        padding-bottom: 20px;
+        margin-top: 50px;
+    }
+
+    .lBtn{ margin-left: 150px;}
+
+    .rBtn{ margin-left: 50px;}
+</style>
+
+<script>
+    //$('#Cancel').bind('click', function() {
+    //    history.go(-1);
+    //});
+    
+    $('#btnSubmit').bind('click', function () {
+        if (!$('form').form('validate')) {
+            return false;
+        }
+        $.ajax({
+            url: '?',
+            type: 'post',
+            data: $('form').serializeJson(),
+            dataType: 'json',
+            async: false,
+            success: function(result) {
+                if (result.IsSuccess) {
+                    alert('Create success');
+                    window.location.href = '@Url.Action("Index","Project")';
+                } else {
+                    alert('Create failed,Please try again');
+                }
+            }
+        });
+    });
+</script>

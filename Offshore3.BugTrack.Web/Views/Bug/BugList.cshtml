@@ -1,0 +1,57 @@
+﻿@model Offshore3.BugTrack.ViewModels.BugListViewModel
+
+
+<div id="EditIssueDiv" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    
+</div>
+<input type="hidden" id="UrlPath" value="@Url.Content("~/Bug/EditIssue")"/>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>CreateDate</th>
+            <th>UpdateTime</th>
+            <th>Assigner</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bugViewModel in Model.BugViewModels)
+        {
+            <tr>
+                <td>
+                    <a href="#EditIssueDiv" role="button"  data-toggle="modal" >
+                        <span class="EditIssue" bugId="@bugViewModel.BugId">
+                            @bugViewModel.BugName
+                        </span>
+                    </a>
+                </td>
+                <td>@bugViewModel.Description</td>
+                <td>@bugViewModel.BugStatusName</td>
+                <td>@bugViewModel.CreateDate.ToShortDateString()</td>
+                <td>@bugViewModel.UpdateTime.ToShortTimeString()</td>
+                <td>@bugViewModel.AssignerName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div id="pageBar">
+    @Html.Action("Page","Common",new {pageViewModel=Model.PageViewModel})
+</div>
+<script>
+    $('.EditIssue').bind('click', function () {
+        var bugId = $(this).attr('bugId');
+        var path = $('#UrlPath').val() + '?projectId=' + @Model.ProjectId + '&bugId=' + bugId;
+        $('#EditIssueDiv').html('');
+        $('#EditIssueDiv').load(path);
+    });
+    $('#pageBar').on('click', '.anchorPage', function () {
+        var page = $(this).html();
+        var count = $('#selCount').val();
+        $('#gridBar').html('');
+        var url = $('#BugListUrl').val();
+        $('#gridBar').load(url + '?projectId=@Model.ProjectId&count=' + count + '&page=' + page);
+    });
+</script>

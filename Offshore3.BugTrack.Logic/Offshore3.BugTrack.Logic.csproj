@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F98352A6-8EEE-491C-96AB-C39D1BDF2D8B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Offshore3.BugTrack.Logic</RootNamespace>
+    <AssemblyName>Offshore3.BugTrack.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BugLogic.cs" />
+    <Compile Include="BugStatusLogic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProjectLogic.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserLogic.cs" />
+    <Compile Include="UserProjectRoleRelationLogic.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Offshore3.BugTrack.Common\Offshore3.BugTrack.Common.csproj">
+      <Project>{f2304328-6751-4d32-8cdc-28709a913f28}</Project>
+      <Name>Offshore3.BugTrack.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Offshore3.BugTrack.Entities\Offshore3.BugTrack.Entities.csproj">
+      <Project>{4EBA5C75-8C15-4F7C-ADE1-FF7611DCD9AD}</Project>
+      <Name>Offshore3.BugTrack.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Offshore3.BugTrack.ILogic\Offshore3.BugTrack.ILogic.csproj">
+      <Project>{87D5B9E9-9A37-4AE9-9142-94F366411C9C}</Project>
+      <Name>Offshore3.BugTrack.ILogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Offshore3.BugTrack.IRepository\Offshore3.BugTrack.IRepository.csproj">
+      <Project>{CBE65791-5E8B-4B2E-8160-7D3E7EC828C6}</Project>
+      <Name>Offshore3.BugTrack.IRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Offshore3.BugTrack.Models\Offshore3.BugTrack.Models.csproj">
+      <Project>{EDB36274-2D05-401A-A8C4-F63A090E9BC2}</Project>
+      <Name>Offshore3.BugTrack.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Offshore3.BugTrack.ViewModels\Offshore3.BugTrack.ViewModels.csproj">
+      <Project>{6a9a3bca-cf53-48c1-8c56-777d256ad66c}</Project>
+      <Name>Offshore3.BugTrack.ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

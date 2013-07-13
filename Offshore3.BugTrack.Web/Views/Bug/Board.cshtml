@@ -1,0 +1,67 @@
+﻿@model Offshore3.BugTrack.ViewModels.BoardViewModel
+
+<style>
+    #sortable {
+        list-style-type: none;
+        margin: 0;
+        margin-top: 50px;
+        padding: 0;
+    }
+
+    #sortable li {
+        border: 1px solid gray;
+        float: left;
+        height: 500px;
+        margin: 10px 10px 10px 10px;
+        padding: 1px;
+        text-align: center;
+        width: 200px;
+    }
+</style>
+<script>
+    $(function() {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+        var isMove = false, statusNames = [];
+        $('#sortable li').bind('mouseup', function() {
+            isMove = true;
+        });
+        $('.statusItem').bind('mouseout', function() {
+            if (isMove) {
+                $('.statusItem').each(function() {
+                    statusNames[statusNames.length] = $(this).find('span').html();
+                });
+                $.ajax({
+                    url: '@Url.Action("UpdateStatusNumber", "Bug")',
+                    type: 'post',
+                    data: { statusNames: statusNames.toString() },
+                    dataType: 'json',
+                    async: false,
+                    success: function (data) {
+                        if (!data.Status) {
+                            alert('error');
+                        }
+                    }
+                });
+                isMove = false;
+                statusNames =[];
+            }
+        });
+
+    });
+</script>
+
+ 
+<ul id="sortable">
+    @foreach (var status in Model.Statuses)
+    {
+        <li class="ui-state-default statusItem">
+            <span>@status.Value</span>
+            <br/>
+            @Html.Action("BugListing", "Bug", new {projectId = Model.ProjectId, statusId = status.Key})
+        </li>
+    }
+    
+   
+  
+</ul>

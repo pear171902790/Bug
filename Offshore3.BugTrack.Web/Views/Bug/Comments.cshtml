@@ -1,0 +1,19 @@
+﻿@model List<Offshore3.BugTrack.ViewModels.CommentViewModel>
+
+
+@foreach (var c in Model)
+{
+    @c.Content 
+    <br/>
+    <span class="addInfo">
+    @c.Commentator 
+    <span>Added</span> 
+    @c.AddTime.ToString()
+        </span>
+    <br/>
+}
+
+
+<style>
+    .addInfo{ font-size: 10px;padding-left: 20px;}
+</style>

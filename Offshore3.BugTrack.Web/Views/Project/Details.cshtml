@@ -1,0 +1,29 @@
+﻿@model long
+@{
+    ViewBag.Title = "Details";
+}
+
+<div id="topArea">
+    <a href="#" id="Settings">Settings</a>&nbsp;|&nbsp;<a href="#" id="Issues">Issues</a>
+</div>
+<div id="mainArea">
+    @Html.Action("Settings","Project",new {projectId=Model});
+</div>
+<script>
+    $('#Settings').bind('click', function () {
+        $('#mainArea').load('@(Url.Action("Settings","Project",new {projectId=Model}))');
+    });
+    $('#Issues').bind('click', function () {
+        $('#mainArea').load( '@(Url.Action("Issues","Bug",new {projectId=Model}))' );
+    });
+</script>
+<style>
+    #topArea {
+        height: 20px;
+        border-bottom: 1px solid grey;
+        margin-bottom: 0;
+    }
+    #mainArea {
+        margin-top: 0;
+    }
+</style>

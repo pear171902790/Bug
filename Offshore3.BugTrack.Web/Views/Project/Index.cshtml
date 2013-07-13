@@ -1,0 +1,39 @@
+﻿@using Offshore3.BugTrack.ViewModels
+@model List<Offshore3.BugTrack.ViewModels.ProjectViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    #main{ width: 1024px;margin-left: auto;margin-right: auto;}
+</style>
+<div id="main">
+<a class="btn" href="@Url.Action("CreateProject","Project")">Create New Project</a>
+<table class="table table-bordered table-striped">
+    <caption>All Projects</caption>
+    <thead>
+        <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Created By</th>
+            <th>Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ProjectViewModel projectViewModel in Model)
+        {
+            <tr>
+                <td><a href="@Url.Content("~/Project/Details/" + projectViewModel.ProjectId)">@projectViewModel.Project.ProjectName</a></td>
+                <td>@projectViewModel.Project.Description</td>
+                <td>@projectViewModel.Creator.UserName</td>
+                <td>
+                    @if (!projectViewModel.CurrentUserRole.RoleName.Equals("Developer"))
+                    {
+                        <a href="#">Edit</a>
+                        <a href="#">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

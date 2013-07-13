@@ -1,0 +1,107 @@
+﻿@model Offshore3.BugTrack.ViewModels.SettingsViewModel
+
+
+<div id="main">
+    <ul class="nav nav-tabs" id="Tabs">
+        <li class="active">
+            <a href="#Setting">Setting</a>
+        </li>
+        <li><a href="#Users">Users</a></li>
+    </ul>
+    <div class="tab-content" id="content">
+        <div id="Setting" class="tab-pane active">
+            <form class="form-horizontal">
+                <input type="hidden" name="ProjectId" value="@Model.ProjectId"/>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.ProjectName, new {@class = "control-label"})
+                    <div class="controls">
+                        <input type="text" id="ProjectName" name="ProjectName" value="@Model.ProjectName"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(m => m.Description, new {@class = "control-label"})
+                    <div class="controls">
+                        @Html.TextAreaFor(m => m.Description,new {value=Model.Description})
+                    </div>
+                </div>
+                
+                <hr />
+                <div>
+                    <a class="btn lBtn" id="btnSave">Save</a>
+                    <a class="btn rBtn" href="@Url.Action("Index", "Users")">Cancel</a>
+                </div>
+            </form>
+        </div>
+        <div id="Users" class="tab-pane">
+            @Html.Action("MemberManager", "Project", new {projectId = Model.ProjectId})
+        </div>
+    </div>
+</div>
+<style>
+    .lBtn { margin-left: 150px; }
+
+    .rBtn { margin-left: 50px; }
+
+    #promptInfo {
+        color: red;
+        height: 20px;
+        text-align: center;
+    }
+
+    #main {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        
+        width: 800px;
+    }
+
+    #Settings, #Users {
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 20px;
+        width: 600px;
+    }
+
+    #content {
+        border: 1px solid gray;
+        border-top: 0;
+        padding-top: 40px;
+    }
+
+    ul {
+        border-bottom: 1px solid gray ! important;
+        margin-bottom: 0 ! important;
+    }
+</style>
+
+<script>
+    $(function() {
+        $('#Tabs a').bind('click', function() {
+            $(this).tab('show');
+        });
+        $('#btnSave').bind('click', function() {
+            if ($('#ProjectName').val() == '') {
+                alert('project name is required');
+                $('#ProjectName').focus();
+                return false;
+            }
+            $.ajax({
+                url: '@Url.Action("Update","Project")',
+                type: 'post',
+                data: $('form').serializeJson(),
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                    if (result.IsSuccess) {
+                        alert('Setting success');
+                        window.location.href = '@Url.Action("Index","Users")';
+                    } else {
+                        alert('Setting failed,Please try again');
+                    }
+                }
+            });
+        });
+    });
+</script>
+

@@ -1,0 +1,120 @@
+﻿@using Offshore3.BugTrack.Common
+@using Offshore3.BugTrack.ViewModels
+@model MemberListViewModel
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>User Name</th>
+            <th>Introduction</th>
+            <th>Role</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MemberViewModel member in Model.MemberViewModels)
+        {
+            <tr userId="@member.UserId">
+                <td>
+                    @if (!string.IsNullOrEmpty(member.ImageUrl))
+                    {
+                        <img src="@Url.Content(member.ImageUrl)" class="img-circle"/>
+                    }
+                </td>
+                <td>@member.UserName</td>
+                <td>@(string.IsNullOrEmpty(member.Introduction) ? string.Empty : member.Introduction)</td>
+                <td>@member.RoleName</td>
+                <td>
+                    @if (member.RoleId!=RoleConfig.Creator)
+                    {
+                        if (Model.CurrentUserRoleId == RoleConfig.Creator)
+                        {
+                            <span>
+                            @if (member.RoleId == RoleConfig.Admin)
+                            {
+                                <a href="#" class="Cancel">Cancel</a>
+                            }
+                            else
+                            {
+                                <a href="#" class="Admin">Admin</a>
+                            }
+                            </span>
+                            <a href="#" class="Delete">Delete</a>
+                        }
+                        else if (member.RoleId == RoleConfig.Participant)
+                        {
+                            <a href="#" class="Delete">Delete</a>
+                        }
+                    }
+                </td>
+            </tr>
+        }            
+    </tbody>
+</table>
+<script>
+    $('table').on('click', '.Admin',function () {
+        var $current = $(this);
+        $.ajax({
+            url: '@Url.Action("UpdateRoleRelation","Project")',
+            type: 'post',
+            data: { UserId: $current.parents('tr').attr('userId'), ProjectId: '@Model.ProjectId', RoleId: '@RoleConfig.Admin' },
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                if (result.IsSuccess) {
+                    $current.parents('td').prev().html('Admin');
+                    $current.parent().html('<a href="#" class="Cancel">Cancel</a>');
+                    //alert('Admin success');
+                } else {
+                    alert('Admin failed');
+                }
+            }
+        });
+    });
+    $('table').on('click','.Cancel', function () {
+        var $current = $(this);
+        $.ajax({
+            url: '@Url.Action("UpdateRoleRelation","Project")',
+            type: 'post',
+            data: { UserId: $current.parents('tr').attr('userId'), ProjectId: '@Model.ProjectId', RoleId: '@RoleConfig.Participant' },
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                if (result.IsSuccess) {
+                    $current.parents('td').prev().html('Participant');
+                    $current.parent().html('<a href="#" class="Admin">Admin</a>');
+                    //alert('Cancel success');
+                } else {
+                    alert('Cancel failed');
+                }
+            }
+        });
+    });
+    $('table').on('click', '.Delete', function () {
+        var $current = $(this);
+        $.ajax({
+            url: '@Url.Action("DeleteMember","Project")',
+            type: 'post',
+            data: { UserId: $current.parents('tr').attr('userId'), ProjectId: '@Model.ProjectId' },
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                if (result.IsSuccess) {
+                    $current.parents('tr').remove();
+                } else {
+                    alert('Delete failed');
+                }
+            }
+        });
+    });
+
+</script>
+<style>
+    table { margin-top: 20px; }
+
+    img {
+        height: 30px;
+        width: 30px;
+    }
+</style>

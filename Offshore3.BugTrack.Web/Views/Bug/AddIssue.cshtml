@@ -1,0 +1,85 @@
+﻿@model Offshore3.BugTrack.ViewModels.AddEditIssueViewModel
+
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<form class="form-horizontal" id="AddIssueForm">
+    <input type="hidden" name="ProjectId" value="@Model.ProjectId"/>
+    <div class="control-group">
+        <label for="BugName" class="control-label">Name</label>
+        <div class="controls">
+            <input type="text" id="AddBugName" name="BugName"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="Description" class="control-label">Description</label>
+        <div class="controls">
+            <textarea name="Description" id="txtDescription">
+            </textarea>
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="BugStatusName" class="control-label">Status:</label>
+        <div class="controls">
+            <input type="text" name="BugStatusName" id="BugStatusName"/>
+            @if (Model.BugStatusNames.Count>0)
+            {
+                <select id="selStatuses">
+                @foreach (string s in Model.BugStatusNames)
+                {
+                    <option value="@s">@s</option>
+                }
+                </select>
+            }
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="AssignerId" class="control-label">Assi
+            gn to:</label>
+        <div class="controls">
+            <select id="selAssigner" name="AssignerId">
+                @foreach (var m in Model.Members)
+                {
+                        <option value="@m.Key">@m.Value</option>
+                }
+            </select>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <a class="btn lBtn" id="btnAddSave">Save</a>
+        <button class="btn rBtn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    </div>
+</form>
+<style>
+    .lBtn { margin-left: 150px; }
+
+    .rBtn { margin-left: 100px; }
+
+    #AddIssueForm { margin-top: 50px; }
+</style>
+<script>
+    $('#selStatuses').bind('change', function() {
+        $('#BugStatusName').val($('#selStatuses').val());
+    });
+    $('#btnAddSave').bind('click', function () {
+        if ($('#AddBugName').val() == '') {
+            alert('Bug name is required');
+            $('#AddBugName').focus();
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("AddIssue", "Bug")',
+            type: 'post',
+            data: $('#AddIssueForm').serializeJson(),
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                if (result.Status) {
+                    $('#AddIssueDiv').modal('hide');
+                    $('#mainBody').load('@Url.Action("Grid", "Bug", new {projectId = Model.ProjectId})');
+                } else {
+                    alert('add failed,Please try again');
+                }
+            }
+        });
+    });
+</script>

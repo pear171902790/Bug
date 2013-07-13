@@ -1,0 +1,38 @@
+﻿@using Offshore3.BugTrack.Common
+@model long
+
+<input type="text" id="UserName">
+<select id="Role">
+    <option value="@RoleConfig.Admin">Admin</option>
+    <option value="@RoleConfig.Participant">participant</option>
+</select>
+<input type="button" value="Add User" class="btn" id="btnAddUser"/>
+
+<div id="UserModels">
+@Html.Action("MemberList", "Project", new { projectId = Model })
+    </div>
+<script>
+    $('#btnAddUser').bind('click', function () {
+        if ($('#UserName').val() == '') {
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("AddMember","Project")',
+            type: 'post',
+            data: { UserName: $('#UserName').val(), ProjectId: '@Model.ToString()', RoleId: $('#Role').val() },
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                if (result.IsSuccess) {
+                    //alert('Add success');
+                    $('#UserModels').load('@Url.Action("MemberList", "Project", new {projectId = Model})');
+                } else {
+                    alert(result.ErrorMessage);
+                }
+            }
+        });
+    });
+</script>
+<style>
+    #UserName,#Role{ margin-bottom: 0;}
+</style>

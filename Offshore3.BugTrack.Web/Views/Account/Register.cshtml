@@ -1,0 +1,62 @@
+﻿@model Offshore3.BugTrack.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm(
+            "Register", 
+            "Account",
+            FormMethod.Post,
+            new{@class = "form-horizontal"}
+        ))
+{
+    <div id="Register">
+        <div class="control-group">
+            @Html.LabelFor(m=>m.UserName,new {@class="control-label"})
+            <div class="controls">
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName, string.Empty, new {@class = "ErrorMessage"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m=>m.Email,new {@class="control-label"})
+            <div class="controls">
+                 @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email, string.Empty, new {@class = "ErrorMessage"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m=>m.Password,new {@class="control-label"})
+            <div class="controls">
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password, string.Empty, new {@class = "ErrorMessage"})
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m=>m.ConfirmPassword,new {@class="control-label"})
+            <div class="controls">
+                @Html.PasswordFor(m => m.ConfirmPassword)
+                @Html.ValidationMessageFor(m => m.ConfirmPassword, string.Empty, new {@class = "ErrorMessage"})
+            </div>
+        </div>
+        <hr />
+            <div>
+                <button type="submit" class="btn lBtn">Register</button>
+                <a class="btn rBtn" href="@Url.Action("Login", "Account")">Cancel</a>
+            </div>
+    </div>
+}
+<style>
+    .lBtn { margin-left: 150px; }
+
+    .rBtn{ margin-left: 50px;}
+
+    #Register {
+        padding-top: 40px;
+        border: 1px solid gray;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 100px;
+        width: 500px;
+    }
+</style>

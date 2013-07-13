@@ -1,0 +1,10 @@
+﻿@model Offshore3.BugTrack.ViewModels.BugAttachmentsViewModel
+
+@if (Model.AttachmentNames != null)
+{
+    foreach(var s in Model.AttachmentNames)
+    {
+        <a href="@Url.Action("DownloadAttachment","Download",new{bugId=Model.BugId,name=s})">@s</a>
+        <br />
+    }
+}

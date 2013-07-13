@@ -1,0 +1,38 @@
+﻿@model long
+
+<form class="form-search" id="formSearch">
+    <div class="input-append">
+        <input type="text" class="span2 search-query" id="txtKeyword">
+        <button class="btn" id="btnSearch">Search</button>
+    </div>&nbsp;&nbsp;
+    <select id="selCount">
+        <option value="3">3</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+    </select>
+</form>
+
+<div id="gridBar">
+    @Html.Action("BugList", "Bug", new {projectId = Model,count=3,page=1})
+</div>
+<input type="hidden" id="BugListUrl" value="@Url.Action("BugList","Bug")"/>
+<script>
+    $('#selCount').bind('change', function() {
+        var count = $('#selCount').val();
+        $('#gridBar').html('');
+        var url = $('#BugListUrl').val();
+        $('#gridBar').load(url + '?projectId=@Model&count=' + count+'&page=1');
+    });
+    $('#btnSearch').bind('click', function () {
+        var keyword = $('#txtKeyword').val();
+        if (keyword == '') {
+            return false;
+        }
+        var count = $('#selCount').val();
+        $('#gridBar').html('');
+        var url = $('#BugListUrl').val();
+        $('#gridBar').load(url + '?projectId=@Model&count=' + count + '&page=1&kw='+keyword);
+    });
+</script>
+
+

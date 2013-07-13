@@ -1,0 +1,44 @@
+D:\work\BugTrack\Offshore3.BugTrack.Web\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ILogic.dll
+D:\work\BugTrack\Offshore3.BugTrack.Web\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ILogic.pdb
+D:\work\BugTrack\Offshore3.BugTrack.Web\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.csprojResolveAssemblyReference.cache
+D:\work\BugTrack\Offshore3.BugTrack.Web\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.dll
+D:\work\BugTrack\Offshore3.BugTrack.Web\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.pdb
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ILogic.dll
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ILogic.pdb
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Entities.dll
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Models.dll
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ViewModels.dll
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\EntityFramework.dll
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Entities.pdb
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Models.pdb
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ViewModels.pdb
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\EntityFramework.xml
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.csprojResolveAssemblyReference.cache
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.dll
+E:\Projects\BugTrack 5-11\OffshoreBugTrack\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.pdb
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ILogic.dll
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ILogic.pdb
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Entities.dll
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Models.dll
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ViewModels.dll
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\EntityFramework.dll
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Entities.pdb
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Models.pdb
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ViewModels.pdb
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\bin\Debug\EntityFramework.xml
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.csprojResolveAssemblyReference.cache
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.dll
+D:\work\OffshoreBugTrack\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.pdb
+E:\BugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ILogic.dll
+E:\BugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ILogic.pdb
+E:\BugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Entities.dll
+E:\BugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Models.dll
+E:\BugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ViewModels.dll
+E:\BugTrack\Offshore3.BugTrack.ILogic\bin\Debug\EntityFramework.dll
+E:\BugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Entities.pdb
+E:\BugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Models.pdb
+E:\BugTrack\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ViewModels.pdb
+E:\BugTrack\Offshore3.BugTrack.ILogic\bin\Debug\EntityFramework.xml
+E:\BugTrack\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.csprojResolveAssemblyReference.cache
+E:\BugTrack\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.dll
+E:\BugTrack\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.pdb

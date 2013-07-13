@@ -1,0 +1,62 @@
+﻿@model Offshore3.BugTrack.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm(
+    "Login",
+    "Account",
+    FormMethod.Post,
+    new { @class = "form-horizontal" }
+    ))
+{
+    <div id="login">
+        <div class="control-group">
+            @Html.LabelFor(m => m.UserNameOrEmail, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(m => m.UserNameOrEmail, new { placeholder = "UserName" })
+                @Html.ValidationMessageFor(m => m.UserNameOrEmail, string.Empty, new { @class = "ErrorMessage" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+            <div class="controls">
+                @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.Password, string.Empty, new { @class = "ErrorMessage" })
+            </div>
+        </div>
+        <hr />
+        <div>
+            <button type="submit" class="btn lBtn">Login</button>
+            <a class="btn rBtn" href="@Url.Action("Register", "Account")">Register</a>
+            <div id="promptInfo">
+                @if (Request.HttpMethod.Equals("POST"))
+                {
+                    @Model.PromptInfo
+                }
+            </div>
+        </div>
+    </div>
+}
+<style>
+   
+    .lBtn { margin-left: 150px; }
+
+    .rBtn{ margin-left: 50px;}
+
+    #promptInfo {
+        color: red;
+        height: 20px;
+        text-align: center;
+    }
+
+    #login {
+        padding-top: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 100px;
+        width: 500px;
+        border: 1px solid gray;
+    }
+
+</style>

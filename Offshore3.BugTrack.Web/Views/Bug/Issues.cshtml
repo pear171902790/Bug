@@ -1,0 +1,33 @@
+﻿@model long
+
+<div class="btn-toolbar" id="toggleArea">
+    <div class="btn-group">
+        <a href="#AddIssueDiv" role="button" class="btn" data-toggle="modal" id="AddIssue">
+            <span id="spanAddIssue">Add Issue</span>
+        </a>
+        <a class="btn" href="#" id="Grid">Grid</a>
+        <a class="btn" href="#" id="Board">Board</a>
+    </div>
+</div>
+
+<div id="AddIssueDiv" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    @Html.Action("AddIssue", "Bug", new { projectId = Model })
+</div>
+<div id="mainBody">
+    @Html.Action("Grid", "Bug", new {projectId = Model})
+</div>
+
+<script>
+    $('#Grid').bind('click', function () {
+        $('#mainBody').load('@Url.Action("Grid", "Bug", new {projectId = Model})');
+    });
+    $('#Board').bind('click', function () {
+        $('#mainBody').load('@Url.Action("Board", "Bug", new {projectId = Model})');
+    });
+</script>
+
+<style>
+    #toggleArea{ float: right;margin-top: 0;}
+    #mainBody{ margin-top: 20px;}
+</style>
+
