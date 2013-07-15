@@ -9,13 +9,12 @@ namespace Offshore3.BugTrack.ILogic
 {
     public interface IUserProjectRoleRelationLogic
     {
-        UserProjectRoleRelation UserProjectRoleRelation { get; set; }
-
-        List<UserProjectRoleRelation> GetByUserId();
+        List<UserProjectRoleRelation> GetByUserId(long userId);
         bool CheckIsMember(long projectId, long userId);
         void AddMember(long userId, long projectId, long roleId);
         long GetRoleId(long projectId, long userId);
         void UpdateRoleRelation(long projectId, long userId, long roleId);
         void DeleteMember(long projectId, long userId);
+        UserProjectRoleRelation GetByRoleIdAndProjectId(long roleId, long projectId);
     }
 }

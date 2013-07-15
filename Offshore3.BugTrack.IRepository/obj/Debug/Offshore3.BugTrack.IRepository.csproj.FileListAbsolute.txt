@@ -34,3 +34,6 @@ E:\BugTrack\Offshore3.BugTrack.IRepository\bin\Debug\EntityFramework.xml
 E:\BugTrack\Offshore3.BugTrack.IRepository\obj\Debug\Offshore3.BugTrack.IRepository.csprojResolveAssemblyReference.cache
 E:\BugTrack\Offshore3.BugTrack.IRepository\obj\Debug\Offshore3.BugTrack.IRepository.dll
 E:\BugTrack\Offshore3.BugTrack.IRepository\obj\Debug\Offshore3.BugTrack.IRepository.pdb
+F:\Bug\Offshore3.BugTrack.IRepository\obj\Debug\Offshore3.BugTrack.IRepository.csprojResolveAssemblyReference.cache
+F:\Bug\Offshore3.BugTrack.IRepository\obj\Debug\Offshore3.BugTrack.IRepository.dll
+F:\Bug\Offshore3.BugTrack.IRepository\obj\Debug\Offshore3.BugTrack.IRepository.pdb

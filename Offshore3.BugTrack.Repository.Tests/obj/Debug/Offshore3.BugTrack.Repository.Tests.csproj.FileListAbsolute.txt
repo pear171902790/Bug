@@ -1,0 +1,15 @@
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\Offshore3.BugTrack.Repository.Tests.dll
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\Offshore3.BugTrack.Repository.Tests.pdb
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\nunit.framework.dll
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\Offshore3.BugTrack.Entities.dll
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\Offshore3.BugTrack.IRepository.dll
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\Offshore3.BugTrack.Repository.dll
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\EntityFramework.dll
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\Offshore3.BugTrack.Entities.pdb
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\Offshore3.BugTrack.IRepository.pdb
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\Offshore3.BugTrack.Repository.pdb
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\nunit.framework.xml
+F:\Bug\Offshore3.BugTrack.Repository.Tests\bin\Debug\EntityFramework.xml
+F:\Bug\Offshore3.BugTrack.Repository.Tests\obj\Debug\Offshore3.BugTrack.Repository.Tests.csprojResolveAssemblyReference.cache
+F:\Bug\Offshore3.BugTrack.Repository.Tests\obj\Debug\Offshore3.BugTrack.Repository.Tests.dll
+F:\Bug\Offshore3.BugTrack.Repository.Tests\obj\Debug\Offshore3.BugTrack.Repository.Tests.pdb

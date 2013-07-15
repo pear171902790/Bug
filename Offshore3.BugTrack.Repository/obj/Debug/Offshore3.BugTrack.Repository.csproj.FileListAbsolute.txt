@@ -62,3 +62,6 @@ E:\BugTrack\Offshore3.BugTrack.Repository\bin\Debug\Offshore3.BugTrack.ViewModel
 E:\BugTrack\Offshore3.BugTrack.Repository\obj\Debug\Offshore3.BugTrack.Repository.csprojResolveAssemblyReference.cache
 E:\BugTrack\Offshore3.BugTrack.Repository\obj\Debug\Offshore3.BugTrack.Repository.dll
 E:\BugTrack\Offshore3.BugTrack.Repository\obj\Debug\Offshore3.BugTrack.Repository.pdb
+F:\Bug\Offshore3.BugTrack.Repository\obj\Debug\Offshore3.BugTrack.Repository.csprojResolveAssemblyReference.cache
+F:\Bug\Offshore3.BugTrack.Repository\obj\Debug\Offshore3.BugTrack.Repository.dll
+F:\Bug\Offshore3.BugTrack.Repository\obj\Debug\Offshore3.BugTrack.Repository.pdb

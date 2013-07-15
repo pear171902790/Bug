@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Offshore3.BugTrack.ViewModels
 {
-    public class ProfileViewModel
+    public class ProfileViewModel:MainLayoutViewModel
     {
         [Required(ErrorMessage = "*")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "(3-100)")]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
-
         
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -35,7 +34,13 @@ namespace Offshore3.BugTrack.ViewModels
         [Display(Name = "Image")]
         public string ImageUrl { get; set; }
 
+        public bool IsUpdateUserImage { get; set; }
+
         public string Introduction { get; set; }
 
+        public override string Title
+        {
+            get { return "Profile"; }
+        }
     }
 }

@@ -7,16 +7,11 @@ using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.IRepository
 {
-    public interface IUserProjectRoleRelationRepository : IRepository<UserProjectRoleRelation>
+    public interface IUserProjectRoleRelationRepository 
     {
-        UserProjectRoleRelation UserProjectRoleRelation { get; set; }
-
-        UserProjectRoleRelation GetByRoleIdAndProjectId();
-        UserProjectRoleRelation GetByRoleIdAndUserId();
-        List<UserProjectRoleRelation> GetByUserId();
-        List<UserProjectRoleRelation> GetByProjectId();
-        UserProjectRoleRelation GetRoleRelationByRoleIdAndProjectId(long roleId, long projectId);
-        UserProjectRoleRelation GetRoleRelationByUserIdAndProjectId(long userId, long projectId);
-        void UpdateRoleRelation(UserProjectRoleRelation userProjectRoleRelation);
+        UserProjectRoleRelation GetByRoleIdAndProjectId(long roleId,long projectId);
+        UserProjectRoleRelation GetByRoleIdAndUserId(long roleId,long userId);
+        List<UserProjectRoleRelation> GetByUserId(long userId);
+        List<UserProjectRoleRelation> GetByProjectId(long projectId);
     }
 }

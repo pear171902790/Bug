@@ -10,13 +10,9 @@ namespace Offshore3.BugTrack.Repository
     {
         private readonly BugTrackDbContext _bugTrackDbContext = new BugTrackDbContext();
 
-
-        public User User { get; set; }
-
-
-        public User GetByUserId()
+        public User Get(long userId)
         {
-            return _bugTrackDbContext.Users.SingleOrDefault(u => u.UserId == User.UserId);
+            return _bugTrackDbContext.Users.SingleOrDefault(u => u.UserId == userId);
         }
 
         public List<User> GetAll()
@@ -24,9 +20,9 @@ namespace Offshore3.BugTrack.Repository
             return _bugTrackDbContext.Users.ToList();
         }
 
-        public bool Add()
+        public bool Add(User user)
         {
-            _bugTrackDbContext.Users.Add(User);
+            _bugTrackDbContext.Users.Add(user);
             return _bugTrackDbContext.SaveChanges()>0;
         }
 
@@ -36,23 +32,18 @@ namespace Offshore3.BugTrack.Repository
             _bugTrackDbContext.Users.Remove(user);
         }
 
-        public User GetByEmailAndPassword()
+        public User GetByEmailAndPassword(string email,string password)
         {
             return _bugTrackDbContext.Users.SingleOrDefault(
-                u => u.Email == User.Email && u.Password == User.Password
+                u => u.Email == email && u.Password == password
                 );
         }
 
-        public User GetByUserNameAndPassword()
+        public User GetByUserNameAndPassword(string username,string password)
         {
             return _bugTrackDbContext.Users.SingleOrDefault(
-                u => u.Email == User.UserName && u.Password == User.Password
+                u => u.Email == username && u.Password == password
                 );
-        }
-
-        public List<UserProjectRoleRelation> GetRoleRelations(long userId)
-        {
-            return _bugTrackDbContext.RoleRelations.Where(rr => rr.UserId == userId).ToList();
         }
 
         public void UpdateImageUrl(long userId, string imageUrl)
@@ -64,11 +55,12 @@ namespace Offshore3.BugTrack.Repository
 
         public void Update(User user)
         {
-            User single = Get(user.UserId);
+            var single = Get(user.UserId);
             single.UserName = user.UserName;
             single.Password = user.Password;
             single.Gender = user.Gender;
             single.Introduction = user.Introduction;
+            single.ImageUrl = user.ImageUrl;
             _bugTrackDbContext.SaveChanges();
         }
 

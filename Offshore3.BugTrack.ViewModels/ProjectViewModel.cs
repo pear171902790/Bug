@@ -7,7 +7,7 @@ using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.ViewModels
 {
-    public class UserProjectViewModel
+    public class ProjectViewModel
     {
         public long ProjectId { get; set; }
         public string ProjectName { get; set; }

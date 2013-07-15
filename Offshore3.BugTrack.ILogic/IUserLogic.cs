@@ -6,16 +6,13 @@ namespace Offshore3.BugTrack.ILogic
 {
     public interface IUserLogic
     {
-        User User { get; set; }
-
-
-        bool AuthenticateUser();
-        User GetByUserNameAndPassword();
-        User GetByEmailAndPassword();
-        bool Register();
-        User Get();
+        bool AuthenticateUser(string email,string username,string password);
+        User GetByUserNameAndPassword(string username,string password);
+        User GetByEmailAndPassword(string email,string password);
+        bool Register(User user);
+        User Get(long userId);
         List<User> GetAll();
-        void UpdateImageUrl();
-        void Update();
+        void UpdateImageUrl(long userId,string imageUrl);
+        void Update(User user);
     }
 }

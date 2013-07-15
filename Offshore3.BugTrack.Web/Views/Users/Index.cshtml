@@ -1,9 +1,6 @@
 ﻿@using Offshore3.BugTrack.Common
 @using Offshore3.BugTrack.ViewModels
 @model IndexViewModel
-@{
-    ViewBag.Title = "Index";
-}
 <style>
     #main{ width: 1024px;margin-left: auto;margin-right: auto;}
 </style>
@@ -24,7 +21,7 @@
         {
             <tr>
                 <td>
-                    @if (projectViewModel.CurrentUserRoleId != RoleConfig.Participant)
+                    @if (projectViewModel.RoleId != RoleConfig.Participant)
                     {
                         <a href="@Url.Content("~/Project/Details/" + projectViewModel.ProjectId)">@projectViewModel.ProjectName</a>
                     }
@@ -36,11 +33,11 @@
                 <td>@projectViewModel.Description</td>
                 <td>@projectViewModel.CreatorName</td>
                 <td>
-                    @if (projectViewModel.CurrentUserRoleId != RoleConfig.Participant)
+                    @if (projectViewModel.RoleId != RoleConfig.Participant)
                     {
                         <a href="@Url.Content("~/Project/Details/" + projectViewModel.ProjectId)">Settings</a>
                     }
-                    @if (projectViewModel.CurrentUserRoleId == RoleConfig.Creator)
+                    @if (projectViewModel.RoleId == RoleConfig.Creator)
                     {
                         <a href="#">Delete</a>
                     }

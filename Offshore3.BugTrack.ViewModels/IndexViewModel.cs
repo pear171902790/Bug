@@ -8,6 +8,11 @@ namespace Offshore3.BugTrack.ViewModels
 {
     public class IndexViewModel : MainLayoutViewModel
     {
-        public List<UserProjectViewModel> UserProjectViewModels { get; set; }
+        public List<ProjectViewModel> ProjectViewModels { get; set; }
+
+        public override string Title
+        {
+            get { return "Index"; }
+        }
     }
 }

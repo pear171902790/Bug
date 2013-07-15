@@ -59,6 +59,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -119,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ICookieHelper.cs" />
+    <Compile Include="Common\UserConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BugController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
@@ -137,9 +139,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\App_Start\FilterConfig.cs" />
+    <Compile Include="Common\App_Start\RouteConfig.cs" />
+    <Compile Include="Common\App_Start\WebApiConfig.cs" />
+    <Content Include="App_Data\Bug.sdf" />
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap\css\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
@@ -1597,7 +1600,6 @@
     <Content Include="Views\Bug\BugListing.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\BugAttachments\" />
     <Folder Include="Content\kindeditor-4.1.7\attached\" />
     <Folder Include="Content\UserImages\" />

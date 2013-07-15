@@ -31,3 +31,16 @@ D:\work\OffshoreBugTrack\Offshore3.BugTrack.Common\obj\Debug\Offshore3.BugTrack.
 D:\work\OffshoreBugTrack\Offshore3.BugTrack.Common\obj\Debug\Offshore3.BugTrack.Common.pdb
 E:\BugTrack\Offshore3.BugTrack.Common\obj\Debug\Offshore3.BugTrack.Common.csprojResolveAssemblyReference.cache
 E:\BugTrack\Offshore3.BugTrack.Common\obj\Debug\Offshore3.BugTrack.Common.dll
+F:\Bug\Offshore3.BugTrack.Common\bin\Debug\Offshore3.BugTrack.Common.dll
+F:\Bug\Offshore3.BugTrack.Common\bin\Debug\Offshore3.BugTrack.Common.pdb
+F:\Bug\Offshore3.BugTrack.Common\bin\Debug\Offshore3.BugTrack.Entities.dll
+F:\Bug\Offshore3.BugTrack.Common\bin\Debug\Offshore3.BugTrack.Models.dll
+F:\Bug\Offshore3.BugTrack.Common\bin\Debug\Offshore3.BugTrack.ViewModels.dll
+F:\Bug\Offshore3.BugTrack.Common\bin\Debug\EntityFramework.dll
+F:\Bug\Offshore3.BugTrack.Common\bin\Debug\Offshore3.BugTrack.Entities.pdb
+F:\Bug\Offshore3.BugTrack.Common\bin\Debug\Offshore3.BugTrack.Models.pdb
+F:\Bug\Offshore3.BugTrack.Common\bin\Debug\Offshore3.BugTrack.ViewModels.pdb
+F:\Bug\Offshore3.BugTrack.Common\bin\Debug\EntityFramework.xml
+F:\Bug\Offshore3.BugTrack.Common\obj\Debug\Offshore3.BugTrack.Common.csprojResolveAssemblyReference.cache
+F:\Bug\Offshore3.BugTrack.Common\obj\Debug\Offshore3.BugTrack.Common.dll
+F:\Bug\Offshore3.BugTrack.Common\obj\Debug\Offshore3.BugTrack.Common.pdb

@@ -94,3 +94,6 @@ E:\BugTrack\Offshore3.BugTrack.Web\bin\System.Web.WebPages.Razor.xml
 E:\BugTrack\Offshore3.BugTrack.Web\obj\Debug\Offshore3.BugTrack.Web.csprojResolveAssemblyReference.cache
 E:\BugTrack\Offshore3.BugTrack.Web\obj\Debug\Offshore3.BugTrack.Web.dll
 E:\BugTrack\Offshore3.BugTrack.Web\obj\Debug\Offshore3.BugTrack.Web.pdb
+F:\Bug\Offshore3.BugTrack.Web\obj\Debug\Offshore3.BugTrack.Web.csprojResolveAssemblyReference.cache
+F:\Bug\Offshore3.BugTrack.Web\obj\Debug\Offshore3.BugTrack.Web.dll
+F:\Bug\Offshore3.BugTrack.Web\obj\Debug\Offshore3.BugTrack.Web.pdb

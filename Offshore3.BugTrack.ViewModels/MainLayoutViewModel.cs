@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Offshore3.BugTrack.ViewModels
 {
-    public class MainLayoutViewModel
+    public abstract class MainLayoutViewModel:LayoutViewModel
     {
         public string CurrentUserName { get; set; }
-        public long CurrentUserId { get; set; }
     }
 }

@@ -13,13 +13,11 @@ namespace Offshore3.BugTrack.Web.Controllers
     {
         private readonly ICookieHelper _cookieHelper;
         private readonly IUserLogic _userLogic;
-        private readonly ITransformModel _transformModel;
 
-        public AccountController(IUserLogic userLogic, ICookieHelper cookieHelper,ITransformModel transformModel)
+        public AccountController(IUserLogic userLogic, ICookieHelper cookieHelper)
         {
             _userLogic = userLogic;
             _cookieHelper = cookieHelper;
-            _transformModel = transformModel;
         }
 
         //public ActionResult Index()
@@ -29,22 +27,24 @@ namespace Offshore3.BugTrack.Web.Controllers
         //}
 
         [HttpGet]
-        public ActionResult Login() //*
+        public ActionResult Login() 
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(LoginViewModel loginViewModel) //*
+        public ActionResult Login(LoginViewModel loginViewModel) 
         {
             try
             {
-                var user=_transformModel.ToUserFromLoginViewModel(loginViewModel);
-                _userLogic.User = user;
-                bool result = _userLogic.AuthenticateUser();
+                var email = loginViewModel.UserNameOrEmail;
+                var password = loginViewModel.Password;
+                var username = loginViewModel.UserNameOrEmail;
+                var result = _userLogic.AuthenticateUser(email,username,password);
                 if (result)
                 {
-                    user = _userLogic.GetByEmailAndPassword() ?? _userLogic.GetByUserNameAndPassword();
+                    var user = _userLogic.GetByEmailAndPassword(email, password) ??
+                               _userLogic.GetByUserNameAndPassword(username, password);
                     _cookieHelper.SetAuthCookie(Convert.ToString(user.UserId), false);
                     return new RedirectResult(Url.Action("Index", "Users"));
                 }
@@ -58,22 +58,30 @@ namespace Offshore3.BugTrack.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Register() //*
+        public ActionResult Register() 
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterViewModel registerViewModel) //*
+        public ActionResult Register(RegisterViewModel registerViewModel) 
         {
             try
             {
-                var user = _transformModel.ToUserFromRegisterViewModel(registerViewModel);
-                _userLogic.User = user;
-                _userLogic.Register();
-                user = _userLogic.GetByEmailAndPassword();
-                _cookieHelper.SetAuthCookie(user.UserId.ToString(), false);
-                return new RedirectResult(Url.Action("Index", "Users"));
+                var user = new User
+                {
+                    UserName = registerViewModel.UserName,
+                    Password = registerViewModel.Password,
+                    Email = registerViewModel.Email
+                };
+                if (_userLogic.Register(user))
+                {
+                    user = _userLogic.GetByEmailAndPassword(user.Email,user.Password);
+                    _cookieHelper.SetAuthCookie(Convert.ToString(user.UserId), false);
+                    return new RedirectResult(Url.Action("Index", "Users"));
+                }
+                registerViewModel.PromptInfo = "Registration failed";
+                return View(registerViewModel);
             }
             catch 
             {

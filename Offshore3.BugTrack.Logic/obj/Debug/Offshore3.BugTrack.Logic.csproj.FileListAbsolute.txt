@@ -53,3 +53,5 @@ D:\work\OffshoreBugTrack\Offshore3.BugTrack.Logic\obj\Debug\Offshore3.BugTrack.L
 D:\work\OffshoreBugTrack\Offshore3.BugTrack.Logic\obj\Debug\Offshore3.BugTrack.Logic.pdb
 E:\BugTrack\Offshore3.BugTrack.Logic\obj\Debug\Offshore3.BugTrack.Logic.csprojResolveAssemblyReference.cache
 E:\BugTrack\Offshore3.BugTrack.Logic\obj\Debug\Offshore3.BugTrack.Logic.dll
+F:\Bug\Offshore3.BugTrack.Logic\obj\Debug\Offshore3.BugTrack.Logic.csprojResolveAssemblyReference.cache
+F:\Bug\Offshore3.BugTrack.Logic\obj\Debug\Offshore3.BugTrack.Logic.dll

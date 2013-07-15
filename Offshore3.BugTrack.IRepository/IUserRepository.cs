@@ -7,17 +7,15 @@ using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.IRepository
 {
-  public interface IUserRepository:IRepository<User>
+  public interface IUserRepository
   {
-      User User { get; set; }
-
-      User GetByUserId();
-      bool Add();
-      User GetByEmailAndPassword();
-      User GetByUserNameAndPassword();
+      User Get(long userId);
+      bool Add(User user);
+      User GetByEmailAndPassword(string email,string password);
+      User GetByUserNameAndPassword(string username,string password);
      
-      void UpdateImageUrl();
-      void Update();
+      void UpdateImageUrl(long userId,string imageUrl);
+      void Update(User user);
       User GetByUserName();
   }
     

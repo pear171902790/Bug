@@ -43,7 +43,6 @@
     <Compile Include="IBugStatusRepository.cs" />
     <Compile Include="ICommentRepository.cs" />
     <Compile Include="IProjectRepository.cs" />
-    <Compile Include="IRepository.cs" />
     <Compile Include="IUserProjectRoleRelationRepository.cs" />
     <Compile Include="IRoleRepository.cs" />
     <Compile Include="IUserRepository.cs" />

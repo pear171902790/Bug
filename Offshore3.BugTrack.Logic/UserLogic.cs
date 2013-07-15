@@ -11,56 +11,44 @@ namespace Offshore3.BugTrack.Logic
     public class UserLogic : IUserLogic
     {
         private readonly IUserRepository _userRepository;
-        private readonly ITransformModel _transformModel;
         private readonly IUserProjectRoleRelationRepository _userProjectRoleRelationRepository;
         private readonly IRoleRepository _roleRepository;
         private readonly IProjectRepository _projectRepository;
 
 
-        public UserLogic(IUserRepository userRepository, ITransformModel transformModel, IUserProjectRoleRelationRepository userProjectRoleRelationRepository, IRoleRepository roleRepository, IProjectRepository projectRepository)
+        public UserLogic(IUserRepository userRepository, IUserProjectRoleRelationRepository userProjectRoleRelationRepository, IRoleRepository roleRepository, IProjectRepository projectRepository)
         {
             _userRepository = userRepository;
-            _transformModel = transformModel;
             _userProjectRoleRelationRepository = userProjectRoleRelationRepository;
             _roleRepository = roleRepository;
             _projectRepository = projectRepository;
             
         }
 
-        private User _user;
-        public User User {
-            get { return _user; }
-            set { 
-                _user = value;
-                _userRepository.User = _user;
-            }
+        public bool Register(User user)
+        {
+            return _userRepository.Add(user);
         }
 
-        public bool Register()
+        public bool AuthenticateUser(string email,string username,string password)
         {
-            return _userRepository.Add();
+            return (_userRepository.GetByEmailAndPassword(email,password) != null ||
+                    _userRepository.GetByUserNameAndPassword(username,password) != null);
         }
 
-        public bool AuthenticateUser()
+        public User Get(long userId)
         {
-            return (_userRepository.GetByEmailAndPassword() != null ||
-                    _userRepository.GetByUserNameAndPassword() != null);
+            return _userRepository.Get(userId);
         }
 
-        public UserModel Get(long userId)
+        public User GetByEmailAndPassword(string email,string password)
         {
-            var user=_userRepository.GetSingle(userId);
-            return _transformModel.ToUserModelFromUser(user);
+            return _userRepository.GetByEmailAndPassword(email,password);
         }
 
-        public User GetByEmailAndPassword()
+        public User GetByUserNameAndPassword(string username,string password)
         {
-            return _userRepository.GetByEmailAndPassword();
-        }
-
-        public User GetByUserNameAndPassword()
-        {
-            return _userRepository.GetByUserNameAndPassword();
+            return _userRepository.GetByUserNameAndPassword(username,password);
         }
 
         public List<UserModel> GetAll()
@@ -74,9 +62,8 @@ namespace Offshore3.BugTrack.Logic
             _userRepository.UpdateImageUrl(userId, imageUrl);
         }
 
-        public void Update(UserModel userModel)
+        public void Update(User user)
         {
-            var user=_transformModel.ToUserFromUserModel(userModel);
             _userRepository.Update(user);
         }
 

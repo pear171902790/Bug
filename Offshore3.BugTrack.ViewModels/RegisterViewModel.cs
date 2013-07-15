@@ -8,7 +8,7 @@ using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.ViewModels
 {
-    public class RegisterViewModel
+    public class RegisterViewModel:LayoutViewModel
     {
         [Required(ErrorMessage = "*")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "(3-100)")]
@@ -31,6 +31,10 @@ namespace Offshore3.BugTrack.ViewModels
         [Required(ErrorMessage = "*")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        
+
+        public string PromptInfo { get; set; }
+        public override string Title { get { return "Register"; } }
+
+
     }
 }

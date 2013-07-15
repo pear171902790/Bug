@@ -22,13 +22,10 @@ namespace Offshore3.BugTrack.Web.Controllers
         public ActionResult UserImage()
         {
             var userId = _cookieHelper.GetUserId(Request);
-            HttpPostedFileBase httpPostedFile = Request.Files["UserImage"];
-            string fileName = System.IO.Path.GetFileName(httpPostedFile.FileName);
-            var dotIndex = fileName.IndexOf(".");
-            var ext = fileName.Substring(dotIndex);
-            string imageName = userId + ext;
-            string virtualPath = "~/Content/UserImages/" + imageName;
-            string fullPath = Server.MapPath(virtualPath);
+            var httpPostedFile = Request.Files["UserImage"];
+            var imageName = userId + "_temp.jpg";
+            var virtualPath = "~/Content/UserImages/" + imageName;
+            var fullPath = Server.MapPath(virtualPath);
             if (System.IO.File.Exists(fullPath))
             {
                 System.IO.File.Delete(fullPath);
@@ -39,7 +36,8 @@ namespace Offshore3.BugTrack.Web.Controllers
                 {
                  Data   = new
                         {
-                            ReplaceHtml = "<img src=\"" + Url.Content(virtualPath) + "\"/>"
+                            ReplaceHtml = "<img src=\"" + Url.Content(virtualPath) + "\"/>",
+                            IsUpdateUserImage=true
                         }
                 };
         }
