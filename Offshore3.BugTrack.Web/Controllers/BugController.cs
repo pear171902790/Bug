@@ -146,13 +146,25 @@ namespace Offshore3.BugTrack.Web.Controllers
         [HttpGet]
         public ActionResult EditIssue(long projectId, long bugId)
         {
-            var project = _projectLogic.GetProjectModelWithMembers(projectId);
-            var bugStatusModels = _bugStatusLogic.GetAll(projectId);
             var bugStatusNames = new List<string>();
-            bugStatusModels.ForEach(bs => bugStatusNames.Add(bs.StatusName));
+            _bugStatusLogic.GetAll(projectId).ForEach(status => bugStatusNames.Add(status.BugStatusName));
             var dictionary = new Dictionary<long, string>();
-            project.Members.ForEach(m => dictionary.Add(m.UserId, m.UserName));
-            IssueViewModel issueViewModel = _transformModel.ToIssueViewModelFromBugModel(_bugLogic.Get(bugId));
+            var userProjectRoleRelations = _userProjectRoleRelationLogic.GetByProjectId(projectId);
+            userProjectRoleRelations.ForEach(uprr =>
+            {
+                var user = _userLogic.Get(uprr.UserId);
+                dictionary.Add(user.UserId, user.UserName);
+            });
+            var bug = _bugLogic.Get(bugId);
+            var issueViewModel =new IssueViewModel
+                {
+                    BugId = bug.BugId,
+                    BugName = bug.BugName,
+                    Description = bug.Description,
+                    BugStatusName = _bugStatusLogic.Get(bug.BugStatusId).BugStatusName,
+                    AssignerId = bug.UserId,
+                    ProjectId = projectId
+                };
             var addEditIssueViewModel =new AddEditIssueViewModel()
                 {
                     Members = dictionary,
@@ -187,8 +199,9 @@ namespace Offshore3.BugTrack.Web.Controllers
             return PartialView(commentViewModels);
         }
 
-        public ActionResult BugAttachments(long bugId,long userId)
+        public ActionResult BugAttachments(long bugId)
         {
+            var userId = _cookieHelper.GetUserId(Request);
             var folderName = bugId == 0 ? userId + "_temp" : userId + "_" + bugId;
             var path = Server.MapPath("~/Content/BugAttachments/" + folderName);
             var attachmentNames = new List<string>();

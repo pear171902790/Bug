@@ -73,7 +73,7 @@
 <script>
     $(function() {
         new AjaxUpload($('#btnUp'), {
-            action: '@Url.Action("BugAttachment", "Upload", new {userId=Model.CurrentUserId})',
+            action: '@Url.Action("BugAttachment", "Upload")',
             name: 'BugAttachment',
             type: 'POST',
             responseType: 'json',
@@ -86,7 +86,7 @@
             },
             onComplete: function(file, response) {
                 if (response.Status) {
-                    $('#divUpload').load('@Url.Action("BugAttachments", "Bug", new {userId=Model.CurrentUserId})');
+                    $('#divUpload').load('@Url.Action("BugAttachments", "Bug")');
                 }
             }
         });

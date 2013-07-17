@@ -41,8 +41,9 @@ namespace Offshore3.BugTrack.Web.Controllers
                 };
         }
 
-        public ActionResult BugAttachment(long bugId,long userId)
+        public ActionResult BugAttachment(long bugId)
         {
+            var userId = _cookieHelper.GetUserId(Request);
             var folderName = bugId == 0 ? userId+"_temp":userId+"_"+bugId;
             HttpPostedFileBase httpPostedFile = Request.Files["BugAttachment"];
             var fileName = System.IO.Path.GetFileName(httpPostedFile.FileName);

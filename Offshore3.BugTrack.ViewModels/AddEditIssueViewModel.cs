@@ -12,8 +12,6 @@ namespace Offshore3.BugTrack.ViewModels
         public Dictionary<long, string> Members { get; set; }
         public List<string> BugStatusNames { get; set; }
         public long ProjectId { get; set; }
-        public string CurrentUserName { get; set; }
-        public long CurrentUserId { get; set; }
     }
    
 

@@ -40,13 +40,13 @@ namespace Offshore3.BugTrack.Web.Controllers
         {
             var userId = _cookieHelper.GetUserId(Request);
             var userProjectRoleRelations = _userProjectRoleRelationLogic.GetByUserId(userId);
-            var user = _userLogic.GetByUserName(userId);
+            var user = _userLogic.Get(userId);
             var projectViewModels = new List<ProjectViewModel>();
             userProjectRoleRelations.ForEach(uprr =>
             {
                 var project = _projectLogic.Get(uprr.ProjectId);
                 var creatorId = _userProjectRoleRelationLogic.GetByRoleIdAndProjectId(RoleConfig.Creator, uprr.ProjectId).UserId;
-                var creator = _userLogic.GetByUserName(creatorId);
+                var creator = _userLogic.Get(creatorId);
                 var projectViewModel = new ProjectViewModel
                 {
                     ProjectId = project.ProjectId,
@@ -72,7 +72,7 @@ namespace Offshore3.BugTrack.Web.Controllers
             var userId = _cookieHelper.GetUserId(Request);
             var createProjectViewModel = new CreateProjectViewModel
             {
-                CurrentUserName = _userLogic.GetByUserName(userId).UserName
+                CurrentUserName = _userLogic.Get(userId).UserName
             };
             return View(createProjectViewModel);
         }
@@ -98,7 +98,7 @@ namespace Offshore3.BugTrack.Web.Controllers
                         RoleId = RoleConfig.Creator
                     };
                 _userProjectRoleRelationLogic.Add(userProjectRoleRelation);
-                return new RedirectResult(Url.Action("Index", "Users"));
+                return new RedirectResult(Url.Action("Index", "Project"));
             }
             catch
             {
@@ -114,7 +114,7 @@ namespace Offshore3.BugTrack.Web.Controllers
             var memberViewModels=new List<MemberViewModel>();
             userProjectRoleRelation.ForEach(uprr =>
                 {
-                    var user = _userLogic.GetByUserName(uprr.UserId);
+                    var user = _userLogic.Get(uprr.UserId);
                     var role = _roleLogic.Get(uprr.RoleId);
                     var ioPath = Server.MapPath(UserConfig.UserImageUrl);
                     var memberViewModel = new MemberViewModel
@@ -147,7 +147,7 @@ namespace Offshore3.BugTrack.Web.Controllers
             var userId=_cookieHelper.GetUserId(Request);
             var detailsViewModel=new DetailsViewModel
                 {
-                    CurrentUserName = _userLogic.GetByUserName(userId).UserName,
+                    CurrentUserName = _userLogic.Get(userId).UserName,
                     ProjectId = id
                 };
             return View(detailsViewModel);
