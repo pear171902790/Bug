@@ -44,28 +44,4 @@
     .rBtn{ margin-left: 50px;}
 </style>
 
-@*<script>
-    $('#Cancel').bind('click', function() {
-        history.go(-1);
-    });
-    $('#btnSubmit').bind('click', function () {
-        if (!$('form').form('validate')) {
-            return false;
-        }
-        $.ajax({
-            url: '?',
-            type: 'post',
-            data: $('form').serializeJson(),
-            dataType: 'json',
-            async: false,
-            success: function(result) {
-                if (result.IsSuccess) {
-                    alert('Create success');
-                    window.location.href = '@Url.Action("Index","ProjectModel")';
-                } else {
-                    alert('Create failed,Please try again');
-                }
-            }
-        });
-    });
-</script>*@
+

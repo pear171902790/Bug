@@ -152,7 +152,7 @@
             autoSubmit: true,
             onComplete: function (file, response) {
                 $('#btnUp').html('Reupload？');
-                $('IsUpdateUserImage').val(response.IsUpdateUserImage);
+                $('#IsUpdateUserImage').val(response.IsUpdateUserImage);
                 $('#Image').html(response.ReplaceHtml);
             }
         });

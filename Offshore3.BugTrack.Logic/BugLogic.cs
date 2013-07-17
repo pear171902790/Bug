@@ -30,9 +30,9 @@ namespace Offshore3.BugTrack.Logic
 
         }
 
-        public int GetTotal(List<long> statusIds)
+        public int GetTotal(List<long> statusIds,string kw)
         {
-            return _bugRepository.GetTotal(statusIds);
+            return _bugRepository.GetTotal(statusIds,kw);
         }
 
         public Bug Get(long bugId)

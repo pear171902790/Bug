@@ -39,3 +39,9 @@ E:\Bug\Offshore3.BugTrack.Entities\bin\Debug\EntityFramework.dll
 E:\Bug\Offshore3.BugTrack.Entities\bin\Debug\EntityFramework.xml
 E:\Bug\Offshore3.BugTrack.Entities\obj\Debug\Offshore3.BugTrack.Entities.dll
 E:\Bug\Offshore3.BugTrack.Entities\obj\Debug\Offshore3.BugTrack.Entities.pdb
+F:\Bug\Offshore3.BugTrack.Entities\bin\Debug\Offshore3.BugTrack.Entities.dll.config
+F:\Bug\Offshore3.BugTrack.Entities\bin\Debug\Offshore3.BugTrack.Entities.dll
+F:\Bug\Offshore3.BugTrack.Entities\bin\Debug\Offshore3.BugTrack.Entities.pdb
+F:\Bug\Offshore3.BugTrack.Entities\bin\Debug\EntityFramework.dll
+F:\Bug\Offshore3.BugTrack.Entities\bin\Debug\EntityFramework.xml
+F:\Bug\Offshore3.BugTrack.Entities\obj\Debug\Offshore3.BugTrack.Entities.pdb

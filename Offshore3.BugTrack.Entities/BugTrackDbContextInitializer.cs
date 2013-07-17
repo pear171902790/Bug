@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace Offshore3.BugTrack.Entities
 {
-    public class BugTrackDbContextInitializer : DropCreateDatabaseIfModelChanges<BugTrackDbContext>
+    public class BugTrackDbContextInitializer : DropCreateDatabaseAlways<BugTrackDbContext>
     {
         protected override void Seed(BugTrackDbContext context)
         {

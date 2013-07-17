@@ -93,20 +93,23 @@
     });
     $('table').on('click', '.Delete', function () {
         var $current = $(this);
-        $.ajax({
-            url: '@Url.Action("DeleteMember","Project")',
-            type: 'post',
-            data: { UserId: $current.parents('tr').attr('userId'), ProjectId: '@Model.ProjectId' },
-            dataType: 'json',
-            async: false,
-            success: function (result) {
-                if (result.IsSuccess) {
-                    $current.parents('tr').remove();
-                } else {
-                    alert('Delete failed');
+        var confirm = window.confirm('Are you sure?');
+        if (confirm) {
+            $.ajax({
+                url: '@Url.Action("DeleteMember","Project")',
+                type: 'post',
+                data: { UserId: $current.parents('tr').attr('userId'), ProjectId: '@Model.ProjectId' },
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                    if (result.IsSuccess) {
+                        $current.parents('tr').remove();
+                    } else {
+                        alert('Delete failed');
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
 </script>

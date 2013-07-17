@@ -78,3 +78,13 @@ E:\Bug\Offshore3.BugTrack.Repository\bin\Debug\EntityFramework.xml
 E:\Bug\Offshore3.BugTrack.Repository\obj\Debug\Offshore3.BugTrack.Repository.csprojResolveAssemblyReference.cache
 E:\Bug\Offshore3.BugTrack.Repository\obj\Debug\Offshore3.BugTrack.Repository.dll
 E:\Bug\Offshore3.BugTrack.Repository\obj\Debug\Offshore3.BugTrack.Repository.pdb
+F:\Bug\Offshore3.BugTrack.Repository\bin\Debug\Offshore3.BugTrack.Repository.dll
+F:\Bug\Offshore3.BugTrack.Repository\bin\Debug\Offshore3.BugTrack.Repository.pdb
+F:\Bug\Offshore3.BugTrack.Repository\bin\Debug\EntityFramework.dll
+F:\Bug\Offshore3.BugTrack.Repository\bin\Debug\Offshore3.BugTrack.Common.dll
+F:\Bug\Offshore3.BugTrack.Repository\bin\Debug\Offshore3.BugTrack.Entities.dll
+F:\Bug\Offshore3.BugTrack.Repository\bin\Debug\Offshore3.BugTrack.IRepository.dll
+F:\Bug\Offshore3.BugTrack.Repository\bin\Debug\Offshore3.BugTrack.Common.pdb
+F:\Bug\Offshore3.BugTrack.Repository\bin\Debug\Offshore3.BugTrack.Entities.pdb
+F:\Bug\Offshore3.BugTrack.Repository\bin\Debug\Offshore3.BugTrack.IRepository.pdb
+F:\Bug\Offshore3.BugTrack.Repository\bin\Debug\EntityFramework.xml

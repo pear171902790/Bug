@@ -53,21 +53,22 @@
 </div>
 <script>
     $('.delProject').click(function () {
+        var $current = $(this);
         var confirm = window.confirm('Are you sure?');
         if (confirm) {
             var projectId = $(this).attr('projectId');
             $.ajax({
                 url: '@Url.Action("Delete", "Project")',
-            type: 'post',
-            data: { projectId: projectId },
-            dataType: 'json',
-            async: false,
-            success: function (result) {
-                if (result.IsSuccess) {
-                    $(this).parents('tr').remove();
-                } else {
-                    alert('Delete failed');
-                }
+                type: 'post',
+                data: { projectId: projectId },
+                dataType: 'json',
+                async: false,
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        $current.parents('tr').remove();
+                    } else {
+                        alert('Delete failed');
+                    }
             }
         });
     }

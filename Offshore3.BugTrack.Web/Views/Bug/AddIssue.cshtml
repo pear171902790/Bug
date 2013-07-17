@@ -73,7 +73,7 @@
 <script>
     $(function() {
         new AjaxUpload($('#btnUp'), {
-            action: '@Url.Action("BugAttachment", "Upload")',
+            action: '@Url.Action("BugAttachment", "Upload",new {bugId=0})',
             name: 'BugAttachment',
             type: 'POST',
             responseType: 'json',
@@ -86,7 +86,7 @@
             },
             onComplete: function(file, response) {
                 if (response.Status) {
-                    $('#divUpload').load('@Url.Action("BugAttachments", "Bug")');
+                    $('#divUpload').load('@Url.Action("BugAttachments", "Bug",new {bugId=0})');
                 }
             }
         });
@@ -99,6 +99,11 @@
         if ($('#AddBugName').val() == '') {
             alert('Bug name is required');
             $('#AddBugName').focus();
+            return false;
+        }
+        if ($('#BugStatusName').val() == '') {
+            alert('Status is required');
+            $('#BugStatusName').focus();
             return false;
         }
         $.ajax({

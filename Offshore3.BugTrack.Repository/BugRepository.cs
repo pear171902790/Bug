@@ -16,9 +16,18 @@ namespace Offshore3.BugTrack.Repository
                    Where(b => statusIds.Contains(b.BugStatusId) && b.UserId == userId).ToList();
         }
 
-        public int GetTotal(List<long> statusIds)
+        public int GetTotal(List<long> statusIds,string kw)
         {
-            return _bugTrackDbContext.Bugs.Count(b => statusIds.Contains(b.BugStatusId));
+            int total;
+            if (string.IsNullOrEmpty(kw))
+            {
+                total = _bugTrackDbContext.Bugs.Count(b => statusIds.Contains(b.BugStatusId));
+            }
+            else
+            {
+                total = _bugTrackDbContext.Bugs.Count(b => statusIds.Contains(b.BugStatusId) && (b.BugName.Contains(kw) || b.Description.Contains(kw)));
+            }
+            return total;
         }
 
         public List<Bug> GetBugs(List<long> statusIds , int count, int page,string kw)

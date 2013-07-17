@@ -115,11 +115,11 @@ namespace Offshore3.BugTrack.Web.Controllers
                 {
                     var user = _userLogic.Get(uprr.UserId);
                     var role = _roleLogic.Get(uprr.RoleId);
-                    var ioPath = Server.MapPath(UserConfig.UserImageUrl);
+                    var webPath =UserConfig.UserImageUrl;
                     var memberViewModel = new MemberViewModel
                         {
                             UserId = user.UserId,
-                            ImageUrl = ioPath+user.UserId+".jpg",
+                            ImageUrl = webPath + user.UserId + ".jpg",
                             UserName = user.UserName,
                             Introduction = user.Introduction,
                             RoleId = role.RoleId,
@@ -173,7 +173,7 @@ namespace Offshore3.BugTrack.Web.Controllers
                     {
                         ProjectId = settingsViewModel.ProjectId,
                         ProjectName = settingsViewModel.ProjectName,
-                        Description = settingsViewModel.ProjectName
+                        Description = settingsViewModel.Description
                     };
                 _projectLogic.Update(project);
 

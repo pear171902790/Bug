@@ -11,7 +11,7 @@ namespace Offshore3.BugTrack.IRepository
     {
         void Add(Bug bug);
         List<Bug> GetBugs(List<long> statusIds, long userId);
-        int GetTotal(List<long> statusIds);
+        int GetTotal(List<long> statusIds,string kw);
         List<Bug> GetBugs(List<long> statusIds, int count,int page,string kw);
         void Update(Bug bug);
         List<Bug> GetList(long bugStatusId);

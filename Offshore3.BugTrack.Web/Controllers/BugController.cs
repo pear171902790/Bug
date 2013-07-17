@@ -46,7 +46,7 @@ namespace Offshore3.BugTrack.Web.Controllers
             var bugStatuses = _bugStatusLogic.GetList(projectId);
             var statusIds=new List<long>();
             bugStatuses.ForEach(bs => statusIds.Add(bs.BugStatusId));
-            var total = _bugLogic.GetTotal(statusIds);
+            var total = _bugLogic.GetTotal(statusIds,kw);
             var bugs = _bugLogic.GetBugs(statusIds, count, page, kw);
             var bugViewModels=new List<BugViewModel>();
             bugs.ForEach(b =>
