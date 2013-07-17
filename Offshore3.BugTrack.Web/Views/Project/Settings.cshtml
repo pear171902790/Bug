@@ -28,7 +28,7 @@
                 <hr />
                 <div>
                     <a class="btn lBtn" id="btnSave">Save</a>
-                    <a class="btn rBtn" href="@Url.Action("Index", "Users")">Cancel</a>
+                    <a class="btn rBtn" href="@Url.Action("Index", "Project")">Cancel</a>
                 </div>
             </form>
         </div>
@@ -95,7 +95,7 @@
                 success: function(result) {
                     if (result.IsSuccess) {
                         alert('Setting success');
-                        window.location.href = '@Url.Action("Index","Users")';
+                        window.location.href = '@Url.Action("Index","Project")';
                     } else {
                         alert('Setting failed,Please try again');
                     }

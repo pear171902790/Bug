@@ -14,16 +14,24 @@ namespace Offshore3.BugTrack.Logic
     public class BugStatusLogic : IBugStatusLogic
     {
         private readonly IBugStatusRepository _bugStatusRepository;
-        private readonly ITransformModel _transformModel;
-        public BugStatusLogic(IBugStatusRepository bugStatusRepository,ITransformModel transformModel)
+        public BugStatusLogic(IBugStatusRepository bugStatusRepository)
         {
             _bugStatusRepository = bugStatusRepository;
-            _transformModel = transformModel;
         }
 
-        public BugStatusModel Get(long bugStatusId)
+        public BugStatus Get(long bugStatusId)
         {
-            return _transformModel.ToBugStatusModelFromBugStatus(_bugStatusRepository.GetSingle(bugStatusId));
+            return _bugStatusRepository.Get(bugStatusId);
+        }
+
+        List<BugStatus> IBugStatusLogic.GetAll(long projectId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BugStatus Get(string bugStatusName)
+        {
+            return _bugStatusRepository.Get(bugStatusName);
         }
 
         public List<BugStatusModel> GetAll(long projectId)
@@ -34,10 +42,7 @@ namespace Offshore3.BugTrack.Logic
             return bugStatusModels;
         }
 
-        public BugStatusModel Get(string bugStatusName)
-        {
-            return _transformModel.ToBugStatusModelFromBugStatus(_bugStatusRepository.Get(bugStatusName));
-        }
+        
 
         public bool IsNewStatus(string bugStatusName)
         {
@@ -52,6 +57,11 @@ namespace Offshore3.BugTrack.Logic
         public void UpdateNumber(string statusName, int number)
         {
             _bugStatusRepository.UpdateNumber(statusName, number);
+        }
+
+        public void Add(BugStatus bugStatus)
+        {
+            _bugStatusRepository.Add(bugStatus);
         }
     }
 }

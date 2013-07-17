@@ -7,12 +7,13 @@ using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.IRepository
 {
-    public interface IBugRepository:IRepository<Bug>
+    public interface IBugRepository
     {
         List<Bug> GetBugs(List<long> statusIds, long userId);
         int GetTotal(List<long> statusIds);
         List<Bug> GetBugs(List<long> statusIds, int count,int page,string kw);
         void Update(Bug bug);
         List<Bug> GetBugs(long statusId);
+        Bug Get(string bugName, DateTime createDate);
     }
 }

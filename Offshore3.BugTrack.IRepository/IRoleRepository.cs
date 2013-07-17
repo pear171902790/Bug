@@ -7,8 +7,9 @@ using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.IRepository
 {
-    public interface IRoleRepository:IRepository<Role>
+    public interface IRoleRepository
     {
-        Role GetRole(string roleName);
+        Role Get(string roleName);
+        Role Get(long roleId);
     }
 }

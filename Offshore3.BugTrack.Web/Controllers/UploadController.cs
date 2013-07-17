@@ -24,14 +24,13 @@ namespace Offshore3.BugTrack.Web.Controllers
             var userId = _cookieHelper.GetUserId(Request);
             var httpPostedFile = Request.Files["UserImage"];
             var imageName = userId + "_temp.jpg";
-            var virtualPath = "~/Content/UserImages/" + imageName;
+            var virtualPath = UserConfig.UserImageUrl + imageName;
             var fullPath = Server.MapPath(virtualPath);
             if (System.IO.File.Exists(fullPath))
             {
                 System.IO.File.Delete(fullPath);
             }
             httpPostedFile.SaveAs(fullPath);
-            _userLogic.UpdateImageUrl(userId, virtualPath);
             return new JsonResult()
                 {
                  Data   = new
@@ -42,11 +41,12 @@ namespace Offshore3.BugTrack.Web.Controllers
                 };
         }
 
-        public ActionResult BugAttachment(long bugId)
+        public ActionResult BugAttachment(long bugId,long userId)
         {
+            var folderName = bugId == 0 ? userId+"_temp":userId+"_"+bugId;
             HttpPostedFileBase httpPostedFile = Request.Files["BugAttachment"];
             var fileName = System.IO.Path.GetFileName(httpPostedFile.FileName);
-            var directoryPath = Server.MapPath(Url.Content("~/Content/BugAttachments/" + bugId));
+            var directoryPath = Server.MapPath(Url.Content("~/Content/BugAttachments/" + folderName));
             if (!System.IO.Directory.Exists(directoryPath))
             {
                 System.IO.Directory.CreateDirectory(directoryPath);

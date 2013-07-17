@@ -47,6 +47,7 @@
     <Compile Include="BugViewModel.cs" />
     <Compile Include="CommentViewModel.cs" />
     <Compile Include="CreateProjectViewModel.cs" />
+    <Compile Include="DetailsViewModel.cs" />
     <Compile Include="GridViewModel.cs" />
     <Compile Include="IndexViewModel.cs" />
     <Compile Include="LayoutViewModel.cs" />

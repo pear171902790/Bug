@@ -12,9 +12,9 @@ namespace Offshore3.BugTrack.Repository
     {
         private readonly BugTrackDbContext _bugTrackDbContext = new BugTrackDbContext();
 
-        public BugStatus GetSingle(long id)
+        public BugStatus Get(long bugStatusId)
         {
-            return _bugTrackDbContext.BugStatuses.SingleOrDefault(bs => bs.BugStatusId == id);
+            return _bugTrackDbContext.BugStatuses.SingleOrDefault(bs => bs.BugStatusId == bugStatusId);
         }
 
         public List<BugStatus> GetAll()
@@ -22,9 +22,10 @@ namespace Offshore3.BugTrack.Repository
             return _bugTrackDbContext.BugStatuses.ToList();
         }
 
-        public void Add(BugStatus userProjectRoleRelation)
+        public void Add(BugStatus bugStatus)
         {
-            throw new NotImplementedException();
+            _bugTrackDbContext.BugStatuses.Add(bugStatus);
+            _bugTrackDbContext.SaveChanges();
         }
 
         public void Delete(long id)
@@ -37,10 +38,7 @@ namespace Offshore3.BugTrack.Repository
             return _bugTrackDbContext.BugStatuses.SingleOrDefault(bs => bs.BugStatusName == bugStatusName);
         }
 
-        public List<BugStatus> Get(long projectId)
-        {
-            return _bugTrackDbContext.BugStatuses.Where(bs => bs.ProjectId == projectId).OrderBy(bs=>bs.Number).ToList();
-        }
+        
 
         public void UpdateNumber(string statusName, int number)
         {

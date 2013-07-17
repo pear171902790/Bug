@@ -12,7 +12,6 @@ namespace Offshore3.BugTrack.ViewModels
         public string ImageUrl { get; set; }
         public string UserName { get; set; }
         public string Introduction { get; set; }
-        public bool Gender { get; set; }
         public long RoleId { get; set; }
         public string RoleName { get; set; }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Offshore3.BugTrack.Common;
+using Offshore3.BugTrack.Entities;
 using Offshore3.BugTrack.ILogic;
 using Offshore3.BugTrack.Models;
 using Offshore3.BugTrack.ViewModels;
@@ -15,18 +16,18 @@ namespace Offshore3.BugTrack.Web.Controllers
         private readonly ICookieHelper _cookieHelper;
         private readonly IProjectLogic _projectLogic;
         private readonly IBugLogic _bugLogic;
-        private readonly ITransformModel _transformModel;
         private readonly IBugStatusLogic _bugStatusLogic;
-        
-        
+        private readonly IUserProjectRoleRelationLogic _userProjectRoleRelationLogic;
+        private readonly IUserLogic _userLogic;
 
-        public BugController(ICookieHelper cookieHelper, IProjectLogic projectLogic, IBugLogic bugLogic, ITransformModel transformModel,IBugStatusLogic bugStatusLogic)
+        public BugController(ICookieHelper cookieHelper, IProjectLogic projectLogic, IBugLogic bugLogic, IBugStatusLogic bugStatusLogic, IUserProjectRoleRelationLogic userProjectRoleRelationLogic, IUserLogic userLogic)
         {
             _cookieHelper = cookieHelper;
             _projectLogic = projectLogic;
             _bugLogic = bugLogic;
-            _transformModel = transformModel;
             _bugStatusLogic = bugStatusLogic;
+            _userProjectRoleRelationLogic = userProjectRoleRelationLogic;
+            _userLogic = userLogic;
         }
 
 
@@ -69,12 +70,15 @@ namespace Offshore3.BugTrack.Web.Controllers
         [HttpGet]
         public ActionResult AddIssue(long projectId)
         {
-            var project = _projectLogic.GetProjectModelWithMembers(projectId);
-            var bugStatusModels = _bugStatusLogic.GetAll(projectId);
             var bugStatusNames = new List<string>();
-            bugStatusModels.ForEach(bs => bugStatusNames.Add(bs.StatusName));
+            _bugStatusLogic.GetAll(projectId).ForEach(status => bugStatusNames.Add(status.BugStatusName));
             var dictionary = new Dictionary<long, string>();
-            project.Members.ForEach(m => dictionary.Add(m.UserId, m.UserName));
+            var userProjectRoleRelations =_userProjectRoleRelationLogic.GetByProjectId(projectId);
+            userProjectRoleRelations.ForEach(uprr =>
+                {
+                    var user = _userLogic.Get(uprr.UserId);
+                    dictionary.Add(user.UserId,user.UserName);
+                });
             var addEditIssueViewModel= new AddEditIssueViewModel()
             {
                 Members = dictionary,
@@ -100,7 +104,6 @@ namespace Offshore3.BugTrack.Web.Controllers
             {
                 return new JsonResult() { Data = new { Status = false } };
             }
-            
         }
 
         [HttpPost]
@@ -109,8 +112,28 @@ namespace Offshore3.BugTrack.Web.Controllers
             var json = new JsonResult();
             try
             {
-                var bugModel = _transformModel.ToBugModelFromIssueViewModel(issueViewModel);
-                _bugLogic.Add(bugModel);
+                var bugStatus = _bugStatusLogic.Get(issueViewModel.BugStatusName) ?? new BugStatus
+                                                                                        {
+                                                                                            BugStatusName = issueViewModel.BugStatusName,
+                                                                                        };
+                bugStatus.ProjectId = issueViewModel.ProjectId;
+                _bugStatusLogic.Add(bugStatus);
+                bugStatus = _bugStatusLogic.Get(issueViewModel.BugStatusName);
+                var bug = new Bug
+                    {
+                        BugName = issueViewModel.BugName,
+                        Description = issueViewModel.Description,
+                        UserId = issueViewModel.AssignerId,
+                        BugStatusId = bugStatus.BugStatusId,
+                        CreateDate = DateTime.Now
+                    };
+                _bugLogic.Add(bug);
+                var bugId = _bugLogic.Get(bug.BugName, bug.CreateDate).BugId;
+                var userId = _cookieHelper.GetUserId(Request);
+                var ioPath = Server.MapPath(Url.Content("~/Content/BugAttachments/"));
+                var bugAttachmentsPath = ioPath + userId + "_" + bugId;
+                var tempPath = ioPath + userId + "_temp";
+                System.IO.Directory.Move(tempPath,bugAttachmentsPath);
                 json.Data = new { Status = true };
             }
             catch
@@ -164,9 +187,10 @@ namespace Offshore3.BugTrack.Web.Controllers
             return PartialView(commentViewModels);
         }
 
-        public ActionResult BugAttachments(long bugId)
+        public ActionResult BugAttachments(long bugId,long userId)
         {
-            var path = Server.MapPath("~/Content/BugAttachments/" + bugId);
+            var folderName = bugId == 0 ? userId + "_temp" : userId + "_" + bugId;
+            var path = Server.MapPath("~/Content/BugAttachments/" + folderName);
             var attachmentNames = new List<string>();
             if (System.IO.Directory.Exists(path))
             {

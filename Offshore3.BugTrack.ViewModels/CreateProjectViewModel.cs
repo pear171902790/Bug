@@ -8,12 +8,17 @@ using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.ViewModels
 {
-    public class CreateProjectViewModel
+    public class CreateProjectViewModel:MainLayoutViewModel
     {
         [Display(Name = "Project Name")]
         [Required(ErrorMessage = "*")]
         public string ProjectName { get; set; }
 
         public string Description { get; set; }
+
+        public override string Title
+        {
+            get { return "CreateProject"; }
+        }
     }
 }

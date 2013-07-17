@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (MemberViewModel member in Model.MemberViewModels)
+        @foreach (var member in Model.MemberViewModels)
         {
             <tr userId="@member.UserId">
                 <td>
@@ -23,10 +23,10 @@
                     }
                 </td>
                 <td>@member.UserName</td>
-                <td>@(string.IsNullOrEmpty(member.Introduction) ? string.Empty : member.Introduction)</td>
+                <td>@member.Introduction ?? string.Empty</td>
                 <td>@member.RoleName</td>
                 <td>
-                    @if (member.RoleId!=RoleConfig.Creator)
+                    @if (member.RoleId != RoleConfig.Creator)
                     {
                         if (Model.CurrentUserRoleId == RoleConfig.Creator)
                         {
@@ -42,7 +42,7 @@
                             </span>
                             <a href="#" class="Delete">Delete</a>
                         }
-                        else if (member.RoleId == RoleConfig.Participant)
+                        else if (Model.CurrentUserRoleId == RoleConfig.Admin&&member.RoleId==RoleConfig.Participant)
                         {
                             <a href="#" class="Delete">Delete</a>
                         }
@@ -56,7 +56,7 @@
     $('table').on('click', '.Admin',function () {
         var $current = $(this);
         $.ajax({
-            url: '@Url.Action("UpdateRoleRelation","Project")',
+            url: '@Url.Action("UpdateRelation","Project")',
             type: 'post',
             data: { UserId: $current.parents('tr').attr('userId'), ProjectId: '@Model.ProjectId', RoleId: '@RoleConfig.Admin' },
             dataType: 'json',
@@ -75,7 +75,7 @@
     $('table').on('click','.Cancel', function () {
         var $current = $(this);
         $.ajax({
-            url: '@Url.Action("UpdateRoleRelation","Project")',
+            url: '@Url.Action("UpdateRelation","Project")',
             type: 'post',
             data: { UserId: $current.parents('tr').attr('userId'), ProjectId: '@Model.ProjectId', RoleId: '@RoleConfig.Participant' },
             dataType: 'json',

@@ -30,15 +30,25 @@ namespace Offshore3.BugTrack.Logic
             return _userRepository.Add(user);
         }
 
-        public bool AuthenticateUser(string email,string username,string password)
+        public bool AuthenticateUser(User user)
         {
-            return (_userRepository.GetByEmailAndPassword(email,password) != null ||
-                    _userRepository.GetByUserNameAndPassword(username,password) != null);
+            return (_userRepository.GetByEmailAndPassword(user.Email, user.Password) != null ||
+                    _userRepository.GetByUserNameAndPassword(user.UserName,user.Password) != null);
         }
 
         public User Get(long userId)
         {
             return _userRepository.Get(userId);
+        }
+
+        public User GetByUserName(string userName)
+        {
+            return _userRepository.GetByUserName(userName);
+        }
+
+        public User GetByEmail(string email)
+        {
+            return _userRepository.GetByEmail(email);
         }
 
         public User GetByEmailAndPassword(string email,string password)
@@ -50,68 +60,11 @@ namespace Offshore3.BugTrack.Logic
         {
             return _userRepository.GetByUserNameAndPassword(username,password);
         }
-
-        public List<UserModel> GetAll()
-        {
-            var users= _userRepository.GetAll();
-            return _transformModel.ToUserModelsFromUsers(users);
-        }
-
-        public void UpdateImageUrl(long userId, string imageUrl)
-        {
-            _userRepository.UpdateImageUrl(userId, imageUrl);
-        }
-
+        
         public void Update(User user)
         {
             _userRepository.Update(user);
         }
-
-        public UserModel Get(string userName)
-        {
-            var user= _userRepository.GetUser(userName);
-            if (user == null)
-                return null;
-            return _transformModel.ToUserModelFromUser(user);
-        }
-
-        public UserModel GetUserModelWithProjects(long userId)
-        {
-            var user = _userRepository.GetSingle(userId);
-            var userModel = _transformModel.ToUserModelFromUser(user);
-            var roleRelations = _userProjectRoleRelationRepository.GetRoleRelationsByUserId(userId);
-            var projectModels = new List<ProjectModel>();
-            roleRelations.ForEach(rr =>
-                {
-                    var project = rr.Project;
-                    var projectModel = _transformModel.ToProjectModelFromProject(project);
-                    projectModel.CurrentUserRoleId = rr.Role.RoleId;
-                    projectModel.CurrentUserRoleName = rr.Role.RoleName;
-                    var roleId = RoleConfig.Creator;
-                    var creatorId = _userProjectRoleRelationRepository
-                        .GetRoleRelationByRoleIdAndProjectId(roleId,project.ProjectId).UserId;
-                    var creator = _userRepository.GetSingle(creatorId);
-                    projectModel.Creator = _transformModel.ToUserModelFromUser(creator);
-                    projectModels.Add(projectModel);
-                });
-            userModel.Projects = projectModels;
-            return userModel;
-        }
-
-        public void CreateProject(long userId, ProjectModel projectModel)
-        {
-            projectModel.CreateDate = DateTime.Now;
-            var project = _transformModel.ToProjectFromProjectModel(projectModel);
-            _projectRepository.Add(project);
-            var projectId = _projectRepository.GetProject(project.ProjectName).ProjectId;
-            var roleId = RoleConfig.Creator;
-            var roleRelation = new RoleRelation()
-                {
-                    UserId = userId,
-                    ProjectId = projectId,
-                    RoleId = roleId
-                };
-            _userProjectRoleRelationRepository.Add(roleRelation);
-        }
+        
     }
 }

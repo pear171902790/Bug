@@ -14,13 +14,12 @@ namespace Offshore3.BugTrack.Logic
 {
     public class ProjectLogic:IProjectLogic
     {
-        private readonly ITransformModel _transformModel;
         private readonly IUserProjectRoleRelationRepository _userProjectRoleRelationRepository;
         private readonly IRoleRepository _roleRepository;
         private readonly IProjectRepository _projectRepository;
 
 
-        public ProjectLogic(ITransformModel transformModel, IUserProjectRoleRelationRepository userProjectRoleRelationRepository, IRoleRepository roleRepository, IProjectRepository projectRepository)
+        public ProjectLogic(IUserProjectRoleRelationRepository userProjectRoleRelationRepository, IRoleRepository roleRepository, IProjectRepository projectRepository)
         {
             _transformModel = transformModel;
             _userProjectRoleRelationRepository = userProjectRoleRelationRepository;
@@ -28,34 +27,31 @@ namespace Offshore3.BugTrack.Logic
             _projectRepository = projectRepository;
         }
 
-        public ProjectModel GetProjectModelWithMembers(long projectId)
+        public void Update(Project project)
         {
-            var project=_projectRepository.GetSingle(projectId);
-            var projectModel = _transformModel.ToProjectModelFromProject(project);
-
-            var roleRelations = _userProjectRoleRelationRepository.GetRoleRelationsByProjectId(projectId);
-            var memebers = new List<UserModel>();
-            roleRelations.ForEach(rr =>
-            {
-                var userModel = _transformModel.ToUserModelFromUser(rr.User);
-                userModel.CurrentProjectRoleId = rr.Role.RoleId;
-                userModel.CurrentProjectRoleName = rr.Role.RoleName;
-                memebers.Add(userModel);
-            });
-            projectModel.Members = memebers;
-            return projectModel;
-        }
-
-        public void Update(ProjectModel projectModel)
-        {
-            var project = _transformModel.ToProjectFromProjectModel(projectModel);
             _projectRepository.Update(project);
         }
 
-        public ProjectModel Get(long projectId)
+        
+
+        public void CreateProject(Project project)
         {
-            var project = _projectRepository.GetSingle(projectId);
-            return _transformModel.ToProjectModelFromProject(project);
+            _projectRepository.Add(project);
+        }
+
+        public Project Get(string projectName, DateTime createDate)
+        {
+            return _projectRepository.Get(projectName,createDate);
+        }
+
+        public void Delete(long projectId)
+        {
+            _projectRepository.Delete(projectId);
+        }
+
+        public Project Get(long projectId)
+        {
+           return _projectRepository.Get(projectId);
         }
 
         public bool CheckIsMember(long projectId, long userId)

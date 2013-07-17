@@ -7,10 +7,11 @@ using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.IRepository
 {
-    public interface IBugStatusRepository:IRepository<BugStatus>
+    public interface IBugStatusRepository
     {
+        BugStatus Get(long bugStatusId);
         BugStatus Get(string bugStatusName);
-        List<BugStatus> Get(long projectId);
+        void Add(BugStatus bugStatus);
         void UpdateNumber(string statusName, int number);
     }
 }

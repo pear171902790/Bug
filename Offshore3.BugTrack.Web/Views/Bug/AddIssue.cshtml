@@ -1,51 +1,65 @@
 ﻿@model Offshore3.BugTrack.ViewModels.AddEditIssueViewModel
 
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<form class="form-horizontal" id="AddIssueForm">
+<form class="form-horizontal">
     <input type="hidden" name="ProjectId" value="@Model.ProjectId"/>
     <div class="control-group">
-        <label for="BugName" class="control-label">Name</label>
+        <label class="control-label">Name:</label>
         <div class="controls">
-            <input type="text" id="AddBugName" name="BugName"/>
+            <input type="text" id="EditBugName" name="BugName"/>
         </div>
     </div>
     <div class="control-group">
-        <label for="Description" class="control-label">Description</label>
+        <label class="control-label">Description:</label>
         <div class="controls">
             <textarea name="Description" id="txtDescription">
+                
             </textarea>
         </div>
     </div>
+
+    <hr />
+
     <div class="control-group">
-        <label for="BugStatusName" class="control-label">Status:</label>
+        <label class="control-label"><a href="#" id="btnUp">Upload Attachment</a></label>
+        <div class="controls" id="divUpload">
+        </div>
+    </div>
+    
+    <hr/>
+    
+    <div class="control-group">
+        <label class="control-label">Status:</label>
         <div class="controls">
             <input type="text" name="BugStatusName" id="BugStatusName"/>
-            @if (Model.BugStatusNames.Count>0)
+            @if (Model.BugStatusNames.Count > 0)
             {
                 <select id="selStatuses">
-                @foreach (string s in Model.BugStatusNames)
+                @foreach (string name in Model.BugStatusNames)
                 {
-                    <option value="@s">@s</option>
+                      <option value="@name">@name</option>
                 }
                 </select>
             }
         </div>
     </div>
+    
     <div class="control-group">
-        <label for="AssignerId" class="control-label">Assi
-            gn to:</label>
+        <label class="control-label">Assign to:</label>
         <div class="controls">
             <select id="selAssigner" name="AssignerId">
                 @foreach (var m in Model.Members)
                 {
-                        <option value="@m.Key">@m.Value</option>
+                    <option value="@m.Key">@m.Value</option>
                 }
             </select>
         </div>
     </div>
+
     <hr />
+    
     <div>
-        <a class="btn lBtn" id="btnAddSave">Save</a>
+        <a class="btn lBtn" id="btnSave">Save</a>
         <button class="btn rBtn" data-dismiss="modal" aria-hidden="true">Cancel</button>
     </div>
 </form>
@@ -57,10 +71,30 @@
     #AddIssueForm { margin-top: 50px; }
 </style>
 <script>
+    $(function() {
+        new AjaxUpload($('#btnUp'), {
+            action: '@Url.Action("BugAttachment", "Upload", new {userId=Model.CurrentUserId})',
+            name: 'BugAttachment',
+            type: 'POST',
+            responseType: 'json',
+            autoSubmit: true,
+            onChange: function(file, ext) {
+                if (!(ext && /^(jpg|jpeg|JPG|JPEG|doc|docx|pdf|txt|xls|ppt)$/.test(ext))) {
+                    alert('format error!', 'system');
+                    return false;
+                }
+            },
+            onComplete: function(file, response) {
+                if (response.Status) {
+                    $('#divUpload').load('@Url.Action("BugAttachments", "Bug", new {userId=Model.CurrentUserId})');
+                }
+            }
+        });
+
     $('#selStatuses').bind('change', function() {
         $('#BugStatusName').val($('#selStatuses').val());
     });
-    $('#btnAddSave').bind('click', function () {
+    $('#btnSave').bind('click', function () {
         if ($('#AddBugName').val() == '') {
             alert('Bug name is required');
             $('#AddBugName').focus();
@@ -69,7 +103,7 @@
         $.ajax({
             url: '@Url.Action("AddIssue", "Bug")',
             type: 'post',
-            data: $('#AddIssueForm').serializeJson(),
+            data: $('form').serializeJson(),
             dataType: 'json',
             async: false,
             success: function (result) {

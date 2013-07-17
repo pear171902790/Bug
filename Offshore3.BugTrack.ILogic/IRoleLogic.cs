@@ -9,6 +9,6 @@ namespace Offshore3.BugTrack.ILogic
 {
     public interface IRoleLogic
     {
-        Role GetRole(string roleName);
+        Role Get(long roleId);
     }
 }

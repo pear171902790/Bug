@@ -53,18 +53,19 @@
         <div class="control-group">
             @Html.LabelFor(m => m.ImageUrl, new { @class = "control-label" })
             <div class="controls">
-                <input type="hidden" name="IsUpdateUserImage" id="IsUpdateUserImage" value="false"/>
+                <input type="hidden" name="IsUpdateUserImage" id="IsUpdateUserImage" value="false" />
                 <div id="ImageArea">
                     @if (string.IsNullOrEmpty(Model.ImageUrl))
                     {
-                        <a href="#" id="btnUp">上传照片？</a>
+                        <a href="#" id="btnUp">Upload Image</a>
                         <div id="Image"></div>
                     }
                     else
                     {
-                        <a href="#" id="btnUp">更换照片？</a>
+                        <a href="#" id="btnUp">Reupload？</a>
                         <div id="Image">
-                            <img src="@Url.Content(Model.ImageUrl)"/></div>
+                            <img src="@Url.Content(Model.ImageUrl)"/>
+                        </div>
                     }
                 </div>
             </div>
@@ -80,7 +81,7 @@
         <hr />
         <div>
             <button type="submit" class="btn lBtn">Save</button>
-            <a class="btn rBtn" href="@Url.Action("Index", "Users")">Cancel</a>
+            <a class="btn rBtn" href="@Url.Action("Index", "Project")">Cancel</a>
         </div>
     </div>
 }
@@ -144,13 +145,13 @@
             responseType: 'json',
             onChange: function (file, ext) {
                 if (!(ext && /^(jpg|jpeg|JPG|JPEG)$/.test(ext))) {
-                    alert('图片格式不正确!', '系统提示');
+                    alert('Image format error!', 'System');
                     return false;
                 }
             },
             autoSubmit: true,
             onComplete: function (file, response) {
-                $('#btnUp').html('重新上传？');
+                $('#btnUp').html('Reupload？');
                 $('IsUpdateUserImage').val(response.IsUpdateUserImage);
                 $('#Image').html(response.ReplaceHtml);
             }

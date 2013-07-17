@@ -16,34 +16,123 @@ namespace Offshore3.BugTrack.Web.Controllers
         private readonly IUserLogic _userLogic;
         private readonly IProjectLogic _projectLogic;
         private readonly ICookieHelper _cookieHelper;
-        private readonly ITransformModel _transformModel;
+        private readonly IUserProjectRoleRelationLogic _userProjectRoleRelationLogic;
+        private readonly IRoleLogic _roleLogic;
 
         public ProjectController
             (
                 IUserLogic userLogic,
                 IProjectLogic projectLogic, 
                 ICookieHelper cookieHelper,
-                ITransformModel transformModel
+                IUserProjectRoleRelationLogic userProjectRoleRelationLogic,
+                IRoleLogic roleLogic
             )
         {
             _userLogic = userLogic;
             _projectLogic = projectLogic;
             _cookieHelper = cookieHelper;
-            _transformModel = transformModel;
+            _userProjectRoleRelationLogic = userProjectRoleRelationLogic;
+            _roleLogic = roleLogic;
         }
 
+        [HttpGet]
+        public ActionResult Index()
+        {
+            var userId = _cookieHelper.GetUserId(Request);
+            var userProjectRoleRelations = _userProjectRoleRelationLogic.GetByUserId(userId);
+            var user = _userLogic.GetByUserName(userId);
+            var projectViewModels = new List<ProjectViewModel>();
+            userProjectRoleRelations.ForEach(uprr =>
+            {
+                var project = _projectLogic.Get(uprr.ProjectId);
+                var creatorId = _userProjectRoleRelationLogic.GetByRoleIdAndProjectId(RoleConfig.Creator, uprr.ProjectId).UserId;
+                var creator = _userLogic.GetByUserName(creatorId);
+                var projectViewModel = new ProjectViewModel
+                {
+                    ProjectId = project.ProjectId,
+                    ProjectName = project.ProjectName,
+                    Description = project.Description,
+                    CreatDate = project.CreateDate,
+                    CreatorName = creator.UserName,
+                    RoleId = uprr.RoleId
+                };
+                projectViewModels.Add(projectViewModel);
+            });
+            var indexViewModel = new IndexViewModel
+            {
+                CurrentUserName = user.UserName,
+                ProjectViewModels = projectViewModels
+            };
+            return View(indexViewModel);
+        }
 
+        [HttpGet]
+        public ActionResult CreateProject()
+        {
+            var userId = _cookieHelper.GetUserId(Request);
+            var createProjectViewModel = new CreateProjectViewModel
+            {
+                CurrentUserName = _userLogic.GetByUserName(userId).UserName
+            };
+            return View(createProjectViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult CreateProject(CreateProjectViewModel createProjectViewModel)
+        {
+            try
+            {
+                var project = new Project
+                {
+                    ProjectName = createProjectViewModel.ProjectName,
+                    Description = createProjectViewModel.Description,
+                    CreateDate = DateTime.Now
+                };
+                var userId = _cookieHelper.GetUserId(Request);
+                _projectLogic.CreateProject(project);
+                var projectId = _projectLogic.Get(project.ProjectName,project.CreateDate).ProjectId;
+                var userProjectRoleRelation=new UserProjectRoleRelation
+                    {
+                        ProjectId = projectId,
+                        UserId = userId,
+                        RoleId = RoleConfig.Creator
+                    };
+                _userProjectRoleRelationLogic.Add(userProjectRoleRelation);
+                return new RedirectResult(Url.Action("Index", "Users"));
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
 
         public ActionResult MemberList(long projectId)
         {
-            var roleId = _projectLogic.GetRoleId(projectId, _cookieHelper.GetUserId(Request));
-            var projectModel = _projectLogic.GetProjectModelWithMembers(projectId);
-            var memberViewModels = _transformModel.ToMemberViewModelsFromProjectModel(projectModel);
+            var currentUserId = _cookieHelper.GetUserId(Request);
+            var currentUserRoleId = _userProjectRoleRelationLogic.GetByUserIdAndProjectId(currentUserId, projectId).RoleId;
+            var userProjectRoleRelation = _userProjectRoleRelationLogic.GetByProjectId(projectId);
+            var memberViewModels=new List<MemberViewModel>();
+            userProjectRoleRelation.ForEach(uprr =>
+                {
+                    var user = _userLogic.GetByUserName(uprr.UserId);
+                    var role = _roleLogic.Get(uprr.RoleId);
+                    var ioPath = Server.MapPath(UserConfig.UserImageUrl);
+                    var memberViewModel = new MemberViewModel
+                        {
+                            UserId = user.UserId,
+                            ImageUrl = ioPath+user.UserId+".jpg",
+                            UserName = user.UserName,
+                            Introduction = user.Introduction,
+                            RoleId = role.RoleId,
+                            RoleName = role.RoleName
+                        };
+                    memberViewModels.Add(memberViewModel);
+                });
             var memberListViewModel=new MemberListViewModel()
                 {
                     ProjectId = projectId,
-                    MemberViewModels = memberViewModels,
-                    CurrentUserRoleId = roleId
+                    CurrentUserRoleId = currentUserRoleId,
+                    MemberViewModels = memberViewModels
                 };
             return PartialView(memberListViewModel);
         }
@@ -56,14 +145,23 @@ namespace Offshore3.BugTrack.Web.Controllers
         public ActionResult Details(long id)
         {
             var userId=_cookieHelper.GetUserId(Request);
-            ViewBag.CurrentUserName = _userLogic.Get(userId).UserName;
-            return View(id);
+            var detailsViewModel=new DetailsViewModel
+                {
+                    CurrentUserName = _userLogic.GetByUserName(userId).UserName,
+                    ProjectId = id
+                };
+            return View(detailsViewModel);
         }
 
         public ActionResult Settings(long projectId)
         {
-            var projectModel = _projectLogic.Get(projectId);
-            var settingsViewModel = _transformModel.ToSettingsViewModelFromProjectModel(projectModel);
+            var project = _projectLogic.Get(projectId);
+            var settingsViewModel = new SettingsViewModel
+                {
+                    ProjectName = project.ProjectName,
+                    Description = project.Description,
+                    ProjectId = project.ProjectId
+                };
             return PartialView(settingsViewModel);
         }
         
@@ -72,8 +170,13 @@ namespace Offshore3.BugTrack.Web.Controllers
             var jsonResult = new JsonResult();
             try
             {
-                var projectModel = _transformModel.ToProjectModelFromSettingsViewModel(settingsViewModel);
-                _projectLogic.Update(projectModel);
+                var project = new Project
+                    {
+                        ProjectId = settingsViewModel.ProjectId,
+                        ProjectName = settingsViewModel.ProjectName,
+                        Description = settingsViewModel.ProjectName
+                    };
+                _projectLogic.Update(project);
 
                 jsonResult.Data = new { IsSuccess = true };
             }
@@ -84,12 +187,18 @@ namespace Offshore3.BugTrack.Web.Controllers
             return jsonResult;
         }
 
-        public ActionResult UpdateRoleRelation(MemberListViewModel memberListViewModel)
+        public ActionResult UpdateRelation(MemberListViewModel memberListViewModel)
         {
             var jsonResult = new JsonResult();
             try
             {
-                _projectLogic.UpdateRoleRelation(memberListViewModel.ProjectId, memberListViewModel.UserId, memberListViewModel.RoleId);
+                var userProjectRoleRelation=new UserProjectRoleRelation
+                    {
+                        UserId = memberListViewModel.UserId,
+                        ProjectId = memberListViewModel.ProjectId,
+                        RoleId = memberListViewModel.RoleId
+                    };
+                _userProjectRoleRelationLogic.Update(userProjectRoleRelation);
                 jsonResult.Data = new { IsSuccess = true };
 
             }
@@ -99,30 +208,35 @@ namespace Offshore3.BugTrack.Web.Controllers
             }
             return jsonResult;
         }
-        
 
         public ActionResult AddMember(MemberManagerViewModel memberManagerViewModel)
         {
             var jsonResult = new JsonResult();
             try
             {
-                var userModel = _userLogic.Get(memberManagerViewModel.UserName);
-                if (userModel != null)
+                var user = _userLogic.GetByUserName(memberManagerViewModel.UserName);
+                if (user == null)
                 {
-                    if (_projectLogic.CheckIsMember(memberManagerViewModel.ProjectId,userModel.UserId))
-                    {
-                        jsonResult.Data = new { IsSuccess = false, ErrorMessage = "Already have this member" };
-                    }
-                    else
-                    {
-                        _projectLogic.AddMember(userModel.UserId, memberManagerViewModel.ProjectId, memberManagerViewModel.RoleId);
-                        jsonResult.Data = new { IsSuccess = true, ErrorMessage = "add success" };
-                    }
+                    user=new User
+                        {
+                            UserName = memberManagerViewModel.UserName,
+                            Password = UserConfig.InitialPassword,
+                            Email = memberManagerViewModel.UserName+UserConfig.InitialEmailExt
+                        };
+                    _userLogic.Register(user);
+                    user = _userLogic.GetByUserName(user.UserName);
                 }
-                else
+                if (_userProjectRoleRelationLogic.GetByUserIdAndProjectId(user.UserId, memberManagerViewModel.ProjectId)==null)
                 {
-                    jsonResult.Data = new { IsSuccess = false, ErrorMessage = "Without the user" };
+                    var userProjectRoleRelation = new UserProjectRoleRelation
+                        {
+                            UserId = user.UserId,
+                            ProjectId = memberManagerViewModel.ProjectId,
+                            RoleId = memberManagerViewModel.RoleId
+                        };
+                    _userProjectRoleRelationLogic.Add(userProjectRoleRelation);
                 }
+                jsonResult.Data = new { IsSuccess = true };
             }
             catch (Exception)
             {
@@ -136,9 +250,30 @@ namespace Offshore3.BugTrack.Web.Controllers
             var jsonResult = new JsonResult();
             try
             {
-                _projectLogic.DeleteMember(memberListViewModel.ProjectId, memberListViewModel.UserId);
+                var userProjectRoleRelation = new UserProjectRoleRelation
+                {
+                    UserId = memberListViewModel.UserId,
+                    ProjectId = memberListViewModel.ProjectId,
+                    RoleId = memberListViewModel.RoleId
+                };
+                _userProjectRoleRelationLogic.Delete(userProjectRoleRelation);
                 jsonResult.Data = new { IsSuccess = true };
 
+            }
+            catch (Exception)
+            {
+                jsonResult.Data = new { IsSuccess = false };
+            }
+            return jsonResult;
+        }
+
+        public ActionResult Delete(long projectId)
+        {
+            var jsonResult = new JsonResult();
+            try
+            {
+                _projectLogic.Delete(projectId);
+                jsonResult.Data = new { IsSuccess = true };
             }
             catch (Exception)
             {

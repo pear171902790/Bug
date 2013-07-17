@@ -16,5 +16,6 @@ namespace Offshore3.BugTrack.ILogic
         bool IsNewStatus(string bugStatusName);
         void Add(string bugStatusName, long projectId);
         void UpdateNumber(string statusName, int number);
+        void Add(BugStatus bugStatus);
     }
 }

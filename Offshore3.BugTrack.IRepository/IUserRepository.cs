@@ -10,13 +10,15 @@ namespace Offshore3.BugTrack.IRepository
   public interface IUserRepository
   {
       User Get(long userId);
+      User GetByUserName(string userName);
+      User GetByEmail(string email);
       bool Add(User user);
       User GetByEmailAndPassword(string email,string password);
       User GetByUserNameAndPassword(string username,string password);
      
       void UpdateImageUrl(long userId,string imageUrl);
       void Update(User user);
-      User GetByUserName();
+      
   }
     
 }

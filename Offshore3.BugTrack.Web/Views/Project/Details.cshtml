@@ -1,20 +1,18 @@
-﻿@model long
-@{
-    ViewBag.Title = "Details";
-}
+﻿@model Offshore3.BugTrack.ViewModels.DetailsViewModel
+
 
 <div id="topArea">
     <a href="#" id="Settings">Settings</a>&nbsp;|&nbsp;<a href="#" id="Issues">Issues</a>
 </div>
 <div id="mainArea">
-    @Html.Action("Settings","Project",new {projectId=Model});
+    @Html.Action("Settings","Project",new {projectId=Model.ProjectId});
 </div>
 <script>
     $('#Settings').bind('click', function () {
-        $('#mainArea').load('@(Url.Action("Settings","Project",new {projectId=Model}))');
+        $('#mainArea').load('@(Url.Action("Settings","Project",new {projectId=Model.ProjectId}))');
     });
     $('#Issues').bind('click', function () {
-        $('#mainArea').load( '@(Url.Action("Issues","Bug",new {projectId=Model}))' );
+        $('#mainArea').load( '@(Url.Action("Issues","Bug",new {projectId=Model.ProjectId}))' );
     });
 </script>
 <style>

@@ -1,18 +1,18 @@
 ﻿@model Offshore3.BugTrack.ViewModels.CreateProjectViewModel
-@{
-    ViewBag.Title = "CreateProject";
-}
 
-
-
-<form class="form-horizontal">
+@using (Html.BeginForm(
+    "CreateProject",
+    "Project",
+    FormMethod.Post,
+    new { @class = "form-horizontal" }
+    ))
+{
     <div id="CreateProject">
         <div class="control-group">
             @Html.LabelFor(m => m.ProjectName, new {@class = "control-label"})
             <div class="controls">
-                <input type="text" class="easyui-validatebox" 
-                    id="ProjectName" name="ProjectName"
-                    required="true"/>
+                @Html.TextBoxFor(m=>m.ProjectName)
+                @Html.ValidationMessageFor(m => m.ProjectName, string.Empty, new { @class = "ErrorMessage" })
             </div>
         </div>
         <div class="control-group">
@@ -23,11 +23,11 @@
         </div>
         <hr />
                 <div>
-                    <a class="btn lBtn" id="btnSubmit">Submit</a>
-                    <a class="btn rBtn" href="@Url.Action("Index", "Project")">Cancel</a>
+                    <input type="submit" class="btn lBtn" value="Submit" />
+                    <a class="btn rBtn" href="@Url.Action("Index", "Users")">Cancel</a>
                 </div>
     </div>
-</form>
+}
 <style>
     #CreateProject {
         margin-left: auto;
@@ -44,11 +44,10 @@
     .rBtn{ margin-left: 50px;}
 </style>
 
-<script>
-    //$('#Cancel').bind('click', function() {
-    //    history.go(-1);
-    //});
-    
+@*<script>
+    $('#Cancel').bind('click', function() {
+        history.go(-1);
+    });
     $('#btnSubmit').bind('click', function () {
         if (!$('form').form('validate')) {
             return false;
@@ -62,11 +61,11 @@
             success: function(result) {
                 if (result.IsSuccess) {
                     alert('Create success');
-                    window.location.href = '@Url.Action("Index","Project")';
+                    window.location.href = '@Url.Action("Index","ProjectModel")';
                 } else {
                     alert('Create failed,Please try again');
                 }
             }
         });
     });
-</script>
+</script>*@

@@ -1,7 +1,7 @@
 ﻿@model Offshore3.BugTrack.ViewModels.AddEditIssueViewModel
 
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<form class="form-horizontal" id="EditIssueForm">
+<form class="form-horizontal">
     <input type="hidden" name="ProjectId" value="@Model.ProjectId"/>
     <input type="hidden" name="BugId" value="@Model.IssueViewModel.BugId">
     <div class="control-group">
@@ -22,7 +22,7 @@
     <hr />
 
     <div class="control-group">
-        <label class="control-label"><a href="#" id="btnUp">上传附件</a></label>
+        <label class="control-label"><a href="#" id="btnUp">Upload Attachment</a></label>
         <div class="controls" id="divUpload">
             @Html.Action("BugAttachments", "Bug", new {bugId = Model.IssueViewModel.BugId})
         </div>
@@ -90,7 +90,7 @@
     <hr />
 
     <div>
-        <a class="btn lBtn" id="btnEditSave">Save</a>
+        <a class="btn lBtn" id="btnSave">Save</a>
         <button class="btn rBtn" data-dismiss="modal" aria-hidden="true">Cancel</button>
     </div>
 </form>
@@ -146,7 +146,7 @@
                 }
             });
         });
-        $('#btnEditSave').bind('click', function () {
+        $('#btnSave').bind('click', function () {
             if ($('#EditBugName').val() == '') {
                 alert('Bug name is required');
                 $('#EditBugName').focus();
@@ -155,7 +155,7 @@
             $.ajax({
                 url: '@Url.Action("EditIssue","Bug")',
                 type: 'post',
-                data: $('#EditIssueForm').serializeJson(),
+                data: $('form').serializeJson(),
                 dataType: 'json',
                 async: false,
                 success: function (result) {

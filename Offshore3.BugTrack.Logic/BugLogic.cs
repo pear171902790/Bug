@@ -126,6 +126,9 @@ namespace Offshore3.BugTrack.Logic
             return bugModels;
         }
 
-        
+        public Bug Get(string bugName, DateTime createDate)
+        {
+            return _bugRepository.Get(bugName, createDate);
+        }
     }
 }

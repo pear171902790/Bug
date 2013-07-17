@@ -37,16 +37,19 @@ namespace Offshore3.BugTrack.Web.Controllers
         {
             try
             {
-                var email = loginViewModel.UserNameOrEmail;
-                var password = loginViewModel.Password;
-                var username = loginViewModel.UserNameOrEmail;
-                var result = _userLogic.AuthenticateUser(email,username,password);
+                var user = new User
+                    {
+                        Email = loginViewModel.UserNameOrEmail,
+                        Password = loginViewModel.Password,
+                         UserName= loginViewModel.UserNameOrEmail
+                    };
+                var result = _userLogic.AuthenticateUser(user);
                 if (result)
                 {
-                    var user = _userLogic.GetByEmailAndPassword(email, password) ??
-                               _userLogic.GetByUserNameAndPassword(username, password);
+                    user = _userLogic.GetByEmailAndPassword(user.Email, user.Password) ??
+                               _userLogic.GetByUserNameAndPassword(user.UserName, user.Password);
                     _cookieHelper.SetAuthCookie(Convert.ToString(user.UserId), false);
-                    return new RedirectResult(Url.Action("Index", "Users"));
+                    return new RedirectResult(Url.Action("Index", "Project"));
                 }
                 loginViewModel.PromptInfo = "username or password is error";
                 return View(loginViewModel);
@@ -68,17 +71,23 @@ namespace Offshore3.BugTrack.Web.Controllers
         {
             try
             {
+                if (_userLogic.GetByUserName(registerViewModel.UserName) != null || _userLogic.GetByEmail(registerViewModel.Email)!=null)
+                {
+                    registerViewModel.PromptInfo = "username or email is already used";
+                    return View(registerViewModel);
+                }
                 var user = new User
                 {
                     UserName = registerViewModel.UserName,
                     Password = registerViewModel.Password,
                     Email = registerViewModel.Email
                 };
+               
                 if (_userLogic.Register(user))
                 {
                     user = _userLogic.GetByEmailAndPassword(user.Email,user.Password);
                     _cookieHelper.SetAuthCookie(Convert.ToString(user.UserId), false);
-                    return new RedirectResult(Url.Action("Index", "Users"));
+                    return new RedirectResult(Url.Action("Index", "Project"));
                 }
                 registerViewModel.PromptInfo = "Registration failed";
                 return View(registerViewModel);
@@ -93,6 +102,66 @@ namespace Offshore3.BugTrack.Web.Controllers
         {
             _cookieHelper.SignOut();
             return new RedirectResult(FormsAuthentication.LoginUrl);
+        }
+
+
+        [HttpGet]
+        public ActionResult Profiles()
+        {
+            try
+            {
+                var userId = _cookieHelper.GetUserId(Request);
+                var user = _userLogic.GetByUserName(userId);
+                var profileViewModel = new ProfileViewModel
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Password = user.Password,
+                    RepeatPassword = user.Password,
+                    Gender = user.Gender,
+                    Introduction = user.Introduction,
+                    CurrentUserName = user.UserName,
+                    ImageUrl = string.Format("{0}{1}.jpg", UserConfig.UserImageUrl, userId)
+                };
+                return View(profileViewModel);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Profiles(ProfileViewModel profileViewModel)
+        {
+            try
+            {
+                var user = new User
+                {
+                    UserName = profileViewModel.UserName,
+                    Email = profileViewModel.Email,
+                    Password = profileViewModel.Password,
+                    Gender = profileViewModel.Gender,
+                    Introduction = profileViewModel.Introduction,
+                    UserId = _cookieHelper.GetUserId(Request),
+                };
+                _userLogic.Update(user);
+
+                if (profileViewModel.IsUpdateUserImage)
+                {
+                    var ioPath = Server.MapPath(UserConfig.UserImageUrl);
+                    var imgPath = ioPath + user.UserId + ".jpg";
+                    var tempImgPath = ioPath + user.UserId + "_temp.jpg";
+                    System.IO.File.Delete(imgPath);
+                    System.IO.File.Move(tempImgPath, imgPath);
+                }
+
+                return new RedirectResult(Url.Action("Index", "Project"));
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
     }
 }

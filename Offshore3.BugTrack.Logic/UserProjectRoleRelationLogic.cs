@@ -31,34 +31,38 @@ namespace Offshore3.BugTrack.Logic
            return _userProjectRoleRelationRepository.GetByUserId(userId);
         }
 
+        public List<UserProjectRoleRelation> GetByProjectId(long projectId)
+        {
+            return _userProjectRoleRelationRepository.GetByProjectId(projectId);
+        }
+
+        public void Delete(UserProjectRoleRelation userProjectRoleRelation)
+        {
+            _userProjectRoleRelationRepository.Delete(userProjectRoleRelation);
+        }
+
         public UserProjectRoleRelation GetByRoleIdAndProjectId(long roleId, long projectId)
         {
             return _userProjectRoleRelationRepository.GetByRoleIdAndProjectId(roleId, projectId);
         }
 
-        public bool CheckIsMember(long projectId, long userId)
+        public UserProjectRoleRelation GetByUserIdAndProjectId(long userId, long projectId)
         {
-            throw new NotImplementedException();
+            return _userProjectRoleRelationRepository.GetByUserIdAndProjectId(userId, projectId);
         }
 
-        public void AddMember(long userId, long projectId, long roleId)
+        public void Add(UserProjectRoleRelation userProjectRoleRelation)
         {
-            throw new NotImplementedException();
+            _userProjectRoleRelationRepository.Add(userProjectRoleRelation);
         }
 
-        public long GetRoleId(long projectId, long userId)
+        public void Update(UserProjectRoleRelation userProjectRoleRelation)
         {
-            throw new NotImplementedException();
+            _userProjectRoleRelationRepository.Update(userProjectRoleRelation);
         }
 
-        public void UpdateRoleRelation(long projectId, long userId, long roleId)
-        {
-            throw new NotImplementedException();
-        }
+      
 
-        public void DeleteMember(long projectId, long userId)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

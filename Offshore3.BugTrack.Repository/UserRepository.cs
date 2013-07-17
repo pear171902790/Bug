@@ -15,6 +15,16 @@ namespace Offshore3.BugTrack.Repository
             return _bugTrackDbContext.Users.SingleOrDefault(u => u.UserId == userId);
         }
 
+        public User GetByUserName(string userName)
+        {
+            return _bugTrackDbContext.Users.SingleOrDefault(u => u.UserName == userName);
+        }
+
+        public User GetByEmail(string email)
+        {
+            return _bugTrackDbContext.Users.SingleOrDefault(u => u.Email == email);
+        }
+
         public List<User> GetAll()
         {
             return _bugTrackDbContext.Users.ToList();

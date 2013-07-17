@@ -19,7 +19,7 @@
         $.ajax({
             url: '@Url.Action("AddMember","Project")',
             type: 'post',
-            data: { UserName: $('#UserName').val(), ProjectId: '@Model.ToString()', RoleId: $('#Role').val() },
+            data: { UserName: $('#UserName').val(), ProjectId: '@Convert.ToString(Model)', RoleId: $('#Role').val() },
             dataType: 'json',
             async: false,
             success: function (result) {

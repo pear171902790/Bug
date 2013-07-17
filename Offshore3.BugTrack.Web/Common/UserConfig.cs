@@ -17,5 +17,15 @@ namespace Offshore3.BugTrack.Web.Common
                 return dict["url"].ToString();
             }
         }
+
+        public static string InitialPassword
+        {
+            get { return "123456"; }
+        }
+
+        public static string InitialEmailExt
+        {
+            get { return "@shinetechchina.com"; }
+        }
     }
 }

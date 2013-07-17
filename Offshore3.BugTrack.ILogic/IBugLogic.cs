@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.ILogic
@@ -12,6 +13,6 @@ namespace Offshore3.BugTrack.ILogic
         List<Bug> GetBugs(long projectId, int count, int page, string kw);
         void Update(Bug bugModel);
         List<Bug> GetBugs(long statusId);
-        
+        Bug Get(string bugName, DateTime createDate);
     }
 }

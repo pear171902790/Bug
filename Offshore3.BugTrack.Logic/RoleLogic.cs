@@ -9,7 +9,7 @@ using Offshore3.BugTrack.IRepository;
 
 namespace Offshore3.BugTrack.Logic
 {
-    public class RoleLogic :IRoleLogic
+    public class RoleLogic:IRoleLogic
     {
         private readonly IRoleRepository _roleRepository;
 
@@ -17,10 +17,9 @@ namespace Offshore3.BugTrack.Logic
         {
             _roleRepository = roleRepository;
         }
-
-        public Role GetRole(string roleName)
+        public Role Get(long roleId)
         {
-            return _roleRepository.GetRole(roleName);
+            return _roleRepository.Get(roleId);
         }
     }
 }

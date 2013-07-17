@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Offshore3.BugTrack.Entities;
 using Offshore3.BugTrack.IRepository;
@@ -17,9 +18,9 @@ namespace Offshore3.BugTrack.Repository
             _bugTrackDbContext = new BugTrackDbContext();
         }
 
-        public Project GetByProjectId()
+        public Project Get(long projectId)
         {
-            return _bugTrackDbContext.Projects.SingleOrDefault(p => p.ProjectId == Project.ProjectId);
+            return _bugTrackDbContext.Projects.SingleOrDefault(p => p.ProjectId == projectId);
         }
 
         public List<Project> GetAll()
@@ -27,29 +28,29 @@ namespace Offshore3.BugTrack.Repository
             return _bugTrackDbContext.Projects.ToList();
         }
 
-        public void Add(Project userProjectRoleRelation)
+        public void Add(Project project)
         {
-            _bugTrackDbContext.Projects.Add(userProjectRoleRelation);
+            _bugTrackDbContext.Projects.Add(project);
             _bugTrackDbContext.SaveChanges();
         }
 
-        public void Delete(long id)
+        public void Delete(long projectId)
         {
-            Project project = GetSingle(id);
+            var project = Get(projectId);
             _bugTrackDbContext.Projects.Remove(project);
             _bugTrackDbContext.SaveChanges();
         }
 
-        public Project GetProject(string projectName)
+        public Project Get(string projectName, DateTime createDate)
         {
             return
                 _bugTrackDbContext.Projects.SingleOrDefault(
-                    p => p.ProjectName == projectName);
+                    p => p.ProjectName == projectName&&p.CreateDate==createDate);
         }
 
         public void Update(Project project)
         {
-            var single = GetSingle(project.ProjectId);
+            var single = Get(project.ProjectId);
             single.ProjectName = project.ProjectName;
             single.Description = project.Description;
             _bugTrackDbContext.SaveChanges();

@@ -7,12 +7,14 @@ using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.IRepository
 {
-    public interface IProjectRepository:IRepository<Project>
+    public interface IProjectRepository
     {
-        Project Project { get; set; }
-
-        Project GetProject(string projectName);
+        void Delete(long projectId);
+        Project Get(string projectName,DateTime createDate);
         void Update(Project project);
-        Project GetByProjectId();
+        Project Get(long projectId);
+        void Add(Project project);
+
+
     }
 }
