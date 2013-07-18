@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Offshore3.BugTrack.Common;
+﻿using System.Collections.Generic;
 using Offshore3.BugTrack.Entities;
 using Offshore3.BugTrack.ILogic;
 using Offshore3.BugTrack.IRepository;
-using Offshore3.BugTrack.Models;
 
 namespace Offshore3.BugTrack.Logic
 {
@@ -24,44 +18,27 @@ namespace Offshore3.BugTrack.Logic
             return _bugStatusRepository.Get(bugStatusId);
         }
 
-        List<BugStatus> IBugStatusLogic.GetAll(long projectId)
+
+        public BugStatus Get(string bugStatusName, long projectId)
         {
-            throw new NotImplementedException();
+            return _bugStatusRepository.Get(bugStatusName,projectId);
         }
 
-        public BugStatus Get(string bugStatusName)
-        {
-            return _bugStatusRepository.Get(bugStatusName);
-        }
+       
 
-        public List<BugStatusModel> GetAll(long projectId)
+        public void UpdateNumber(long statusId, int number)
         {
-            var bugStatusModels = new List<BugStatusModel>();
-            var bugStatuses = _bugStatusRepository.Get(projectId);
-            bugStatuses.ForEach(bs => bugStatusModels.Add(_transformModel.ToBugStatusModelFromBugStatus(bs)));
-            return bugStatusModels;
-        }
-
-        
-
-        public bool IsNewStatus(string bugStatusName)
-        {
-            return _bugStatusRepository.Get(bugStatusName) == null;
-        }
-
-        public void Add(string bugStatusName,long projectId)
-        {
-            _bugStatusRepository.Add(new BugStatus { BugStatusName = bugStatusName, ProjectId = projectId });
-        }
-
-        public void UpdateNumber(string statusName, int number)
-        {
-            _bugStatusRepository.UpdateNumber(statusName, number);
+            _bugStatusRepository.UpdateNumber(statusId, number);
         }
 
         public void Add(BugStatus bugStatus)
         {
             _bugStatusRepository.Add(bugStatus);
+        }
+
+        public List<BugStatus> GetList(long projectId)
+        {
+            return _bugStatusRepository.GetList(projectId);
         }
     }
 }

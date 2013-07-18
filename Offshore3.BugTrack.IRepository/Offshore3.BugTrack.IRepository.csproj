@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="IBugRepository.cs" />
     <Compile Include="IBugStatusRepository.cs" />
-    <Compile Include="ICommentRepository.cs" />
+    <Compile Include="IBugCommentRepository.cs" />
     <Compile Include="IProjectRepository.cs" />
     <Compile Include="IUserProjectRoleRelationRepository.cs" />
     <Compile Include="IRoleRepository.cs" />

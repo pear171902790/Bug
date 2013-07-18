@@ -22,19 +22,19 @@
     $(function() {
         $("#sortable").sortable();
         $("#sortable").disableSelection();
-        var isMove = false, statusNames = [];
+        var isMove = false, statusIds = [];
         $('#sortable li').bind('mouseup', function() {
             isMove = true;
         });
         $('.statusItem').bind('mouseout', function() {
             if (isMove) {
                 $('.statusItem').each(function() {
-                    statusNames[statusNames.length] = $(this).find('span').html();
+                    statusIds[statusIds.length] = $(this).find('input').val();
                 });
                 $.ajax({
                     url: '@Url.Action("UpdateStatusNumber", "Bug")',
                     type: 'post',
-                    data: { statusNames: statusNames.toString() },
+                    data: { statusIds: statusIds.toString() },
                     dataType: 'json',
                     async: false,
                     success: function (data) {
@@ -57,6 +57,7 @@
     {
         <li class="ui-state-default statusItem">
             <span>@status.Value</span>
+            <input type="hidden" value="@status.Key"/>
             <br/>
             @Html.Action("BugListing", "Bug", new {projectId = Model.ProjectId, statusId = status.Key})
         </li>

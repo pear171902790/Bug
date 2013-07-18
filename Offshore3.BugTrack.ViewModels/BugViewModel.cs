@@ -18,5 +18,6 @@ namespace Offshore3.BugTrack.ViewModels
         public long BugStatusId { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateTime { get; set; }
+        public long ProjectId { get; set; }
     }
 }

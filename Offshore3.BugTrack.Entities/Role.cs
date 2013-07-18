@@ -11,7 +11,7 @@ namespace Offshore3.BugTrack.Entities
         public virtual long RoleId { get; set; }
         public virtual string RoleName { get; set; }
 
-        public List<UserProjectRoleRelation> RoleRelations { get; set; }
+        public List<UserProjectRoleRelation> UserProjectRoleRelations { get; set; }
     }
 }
         

@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddEditIssueViewModel.cs" />
+    <Compile Include="AddEditBugViewModel.cs" />
     <Compile Include="BoardViewModel.cs" />
     <Compile Include="BugAttachmentsViewModel.cs" />
     <Compile Include="BugListViewModel.cs" />
@@ -48,8 +48,10 @@
     <Compile Include="CommentViewModel.cs" />
     <Compile Include="CreateProjectViewModel.cs" />
     <Compile Include="DetailsViewModel.cs" />
+    <Compile Include="ErrorViewModel.cs" />
     <Compile Include="GridViewModel.cs" />
     <Compile Include="IndexViewModel.cs" />
+    <Compile Include="InitViewModel.cs" />
     <Compile Include="LayoutViewModel.cs" />
     <Compile Include="LoginViewModel.cs" />
     <Compile Include="MemberListViewModel.cs" />

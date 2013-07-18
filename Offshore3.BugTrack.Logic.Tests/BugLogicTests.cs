@@ -15,19 +15,6 @@ namespace Offshore3.BugTrack.Logic.Tests
     {
 
 
-        [Test]
-        public void GetTotal_ProjectIdIsZero_ReturnsZero()
-        {
-            var bugRepository = new Mock<IBugRepository>();
-            
-            var bugLogic = new BugLogic(bugRepository.Object,null,null,null,null,null,null);
-
-            bugRepository.Setup(x => x.GetTotal(null)).Returns(0);
-
-            var result=bugLogic.GetTotal(0);
-
-            Assert.AreEqual(0,result);
-
-        }
+        
     }
 }

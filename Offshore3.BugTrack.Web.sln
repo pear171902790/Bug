@@ -27,12 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{671112
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Offshore3.BugTrack.Web.Tests", "Offshore3.BugTrack.Web.Tests\Offshore3.BugTrack.Web.Tests.csproj", "{DDEFB412-7313-481C-A479-3E6C29263777}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Offshore3.BugTrack.Repository.Tests", "Offshore3.BugTrack.Repository.Tests\Offshore3.BugTrack.Repository.Tests.csproj", "{70C6323C-5DFE-465C-8C76-EABCE9DE60EA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Offshore3.BugTrack.Logic.Tests", "Offshore3.BugTrack.Logic.Tests\Offshore3.BugTrack.Logic.Tests.csproj", "{F673CE06-800D-4B77-9997-C3EA773F695E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,18 +69,6 @@ Global
 		{4EBA5C75-8C15-4F7C-ADE1-FF7611DCD9AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EBA5C75-8C15-4F7C-ADE1-FF7611DCD9AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EBA5C75-8C15-4F7C-ADE1-FF7611DCD9AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DDEFB412-7313-481C-A479-3E6C29263777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDEFB412-7313-481C-A479-3E6C29263777}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DDEFB412-7313-481C-A479-3E6C29263777}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DDEFB412-7313-481C-A479-3E6C29263777}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70C6323C-5DFE-465C-8C76-EABCE9DE60EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70C6323C-5DFE-465C-8C76-EABCE9DE60EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70C6323C-5DFE-465C-8C76-EABCE9DE60EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70C6323C-5DFE-465C-8C76-EABCE9DE60EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F673CE06-800D-4B77-9997-C3EA773F695E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F673CE06-800D-4B77-9997-C3EA773F695E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F673CE06-800D-4B77-9997-C3EA773F695E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F673CE06-800D-4B77-9997-C3EA773F695E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

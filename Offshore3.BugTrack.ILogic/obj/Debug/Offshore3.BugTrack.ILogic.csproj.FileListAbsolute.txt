@@ -45,3 +45,12 @@ E:\BugTrack\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.pdb
 F:\Bug\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.csprojResolveAssemblyReference.cache
 F:\Bug\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.dll
 F:\Bug\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.pdb
+E:\Bug\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ILogic.dll
+E:\Bug\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.ILogic.pdb
+E:\Bug\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Entities.dll
+E:\Bug\Offshore3.BugTrack.ILogic\bin\Debug\EntityFramework.dll
+E:\Bug\Offshore3.BugTrack.ILogic\bin\Debug\Offshore3.BugTrack.Entities.pdb
+E:\Bug\Offshore3.BugTrack.ILogic\bin\Debug\EntityFramework.xml
+E:\Bug\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.csprojResolveAssemblyReference.cache
+E:\Bug\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.dll
+E:\Bug\Offshore3.BugTrack.ILogic\obj\Debug\Offshore3.BugTrack.ILogic.pdb

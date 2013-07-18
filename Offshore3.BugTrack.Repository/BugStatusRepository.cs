@@ -33,18 +33,21 @@ namespace Offshore3.BugTrack.Repository
             throw new NotImplementedException();
         }
 
-        public BugStatus Get(string bugStatusName)
+        public BugStatus Get(string bugStatusName, long projectId)
         {
-            return _bugTrackDbContext.BugStatuses.SingleOrDefault(bs => bs.BugStatusName == bugStatusName);
+            return _bugTrackDbContext.BugStatuses.SingleOrDefault(bs => bs.BugStatusName == bugStatusName&&bs.ProjectId==projectId);
         }
 
-        
-
-        public void UpdateNumber(string statusName, int number)
+        public void UpdateNumber(long statusId, int number)
         {
-            var status = Get(statusName);
+            var status = Get(statusId);
             status.Number = number;
             _bugTrackDbContext.SaveChanges();
+        }
+
+        public List<BugStatus> GetList(long projectId)
+        {
+            return _bugTrackDbContext.BugStatuses.Where(bs => bs.ProjectId == projectId).OrderBy(s=>s.Number).ToList();
         }
     }
 }

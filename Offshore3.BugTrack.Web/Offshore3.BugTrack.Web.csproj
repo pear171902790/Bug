@@ -1586,7 +1586,7 @@
     <Content Include="Views\Project\MemberManager.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\MemberList.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Init.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Bug\Issues.cshtml" />
     <Content Include="Views\Bug\Grid.cshtml" />
@@ -1597,6 +1597,7 @@
     <Content Include="Views\Bug\EditIssue.cshtml" />
     <Content Include="Views\Common\Page.cshtml" />
     <Content Include="Views\Bug\BugListing.cshtml" />
+    <Content Include="Views\Shared\ErrorLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\BugAttachments\" />

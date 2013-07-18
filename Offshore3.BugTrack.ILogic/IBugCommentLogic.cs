@@ -9,6 +9,7 @@ namespace Offshore3.BugTrack.ILogic
 {
     public interface IBugCommentLogic
     {
-        List<BugComment> GetCommentModels(long bugId);
+        List<BugComment> GetByBugId(long bugId);
+        void Add(BugComment bugComment);
     }
 }

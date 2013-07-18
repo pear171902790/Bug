@@ -7,9 +7,9 @@ using Offshore3.BugTrack.Entities;
 
 namespace Offshore3.BugTrack.IRepository
 {
-    public interface ICommentRepository:IRepository<BugComment>
+    public interface IBugCommentRepository
     {
-        List<BugComment> Get(long bugId);
-
+        List<BugComment> GetByBugId(long bugId);
+        void Add(BugComment bugComment);
     }
 }

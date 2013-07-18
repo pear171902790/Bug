@@ -52,16 +52,11 @@ namespace Offshore3.BugTrack.Repository
         public User GetByUserNameAndPassword(string username,string password)
         {
             return _bugTrackDbContext.Users.SingleOrDefault(
-                u => u.Email == username && u.Password == password
+                u => u.UserName == username && u.Password == password
                 );
         }
 
-        public void UpdateImageUrl(long userId, string imageUrl)
-        {
-            var user = Get(userId);
-            user.ImageUrl = imageUrl;
-            _bugTrackDbContext.SaveChanges();
-        }
+       
 
         public void Update(User user)
         {
@@ -70,7 +65,6 @@ namespace Offshore3.BugTrack.Repository
             single.Password = user.Password;
             single.Gender = user.Gender;
             single.Introduction = user.Introduction;
-            single.ImageUrl = user.ImageUrl;
             _bugTrackDbContext.SaveChanges();
         }
 

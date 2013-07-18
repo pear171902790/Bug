@@ -23,7 +23,7 @@
                     }
                 </td>
                 <td>@member.UserName</td>
-                <td>@member.Introduction ?? string.Empty</td>
+                <td>@(member.Introduction ?? string.Empty)</td>
                 <td>@member.RoleName</td>
                 <td>
                     @if (member.RoleId != RoleConfig.Creator)

@@ -6,13 +6,12 @@ namespace Offshore3.BugTrack.ILogic
 {
     public interface IBugLogic
     {
-        int GetTotal(long projectId);
+        int GetTotal(List<long> statusIds);
         Bug Get(long bugId);
-        void AddComment(string content, long bugId,long userId);
-        void Add(Bug bugModel);
-        List<Bug> GetBugs(long projectId, int count, int page, string kw);
-        void Update(Bug bugModel);
-        List<Bug> GetBugs(long statusId);
+        void Add(Bug bug);
+        List<Bug> GetBugs(List<long> statusIds, int count, int page, string kw);
+        void Update(Bug bug);
         Bug Get(string bugName, DateTime createDate);
+        List<Bug> GetList(long bugStatusId);
     }
 }

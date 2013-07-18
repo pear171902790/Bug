@@ -32,3 +32,10 @@ E:\BugTrack\Offshore3.BugTrack.Entities\obj\Debug\Offshore3.BugTrack.Entities.dl
 E:\BugTrack\Offshore3.BugTrack.Entities\obj\Debug\Offshore3.BugTrack.Entities.pdb
 F:\Bug\Offshore3.BugTrack.Entities\obj\Debug\Offshore3.BugTrack.Entities.csprojResolveAssemblyReference.cache
 F:\Bug\Offshore3.BugTrack.Entities\obj\Debug\Offshore3.BugTrack.Entities.dll
+E:\Bug\Offshore3.BugTrack.Entities\bin\Debug\Offshore3.BugTrack.Entities.dll.config
+E:\Bug\Offshore3.BugTrack.Entities\bin\Debug\Offshore3.BugTrack.Entities.dll
+E:\Bug\Offshore3.BugTrack.Entities\bin\Debug\Offshore3.BugTrack.Entities.pdb
+E:\Bug\Offshore3.BugTrack.Entities\bin\Debug\EntityFramework.dll
+E:\Bug\Offshore3.BugTrack.Entities\bin\Debug\EntityFramework.xml
+E:\Bug\Offshore3.BugTrack.Entities\obj\Debug\Offshore3.BugTrack.Entities.dll
+E:\Bug\Offshore3.BugTrack.Entities\obj\Debug\Offshore3.BugTrack.Entities.pdb

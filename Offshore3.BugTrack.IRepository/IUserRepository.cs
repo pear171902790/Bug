@@ -16,7 +16,6 @@ namespace Offshore3.BugTrack.IRepository
       User GetByEmailAndPassword(string email,string password);
       User GetByUserNameAndPassword(string username,string password);
      
-      void UpdateImageUrl(long userId,string imageUrl);
       void Update(User user);
       
   }

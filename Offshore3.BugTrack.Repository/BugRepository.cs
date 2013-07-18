@@ -23,7 +23,7 @@ namespace Offshore3.BugTrack.Repository
 
         public List<Bug> GetBugs(List<long> statusIds , int count, int page,string kw)
         {
-            var bugs=new List<Bug>();
+            List<Bug> bugs;
             var skipCount = (page - 1)*count;
             if (string.IsNullOrEmpty(kw))
             {
@@ -51,17 +51,21 @@ namespace Offshore3.BugTrack.Repository
             _bugTrackDbContext.SaveChanges();
         }
 
-        public List<Bug> GetBugs(long statusId)
+        public List<Bug> GetList(long bugStatusId)
         {
-            var bugs= _bugTrackDbContext.Bugs.Where(
-                b => b.BugStatusId == statusId
+            return _bugTrackDbContext.Bugs.Where(
+                b => b.BugStatusId == bugStatusId
                 ).ToList();
-            return bugs;
         }
 
         public Bug Get(string bugName, DateTime createDate)
         {
             return _bugTrackDbContext.Bugs.SingleOrDefault(b => b.BugName == bugName&&b.CreateDate==createDate);
+        }
+
+        public Bug Get(long bugId)
+        {
+            return _bugTrackDbContext.Bugs.SingleOrDefault(b => b.BugId == bugId);
         }
 
         public Bug GetSingle(long id)
@@ -74,10 +78,9 @@ namespace Offshore3.BugTrack.Repository
             return _bugTrackDbContext.Bugs.ToList();
         }
 
-        public void Add(Bug userProjectRoleRelation)
+        public void Add(Bug bug)
         {
-            userProjectRoleRelation.BugId = 0;
-            _bugTrackDbContext.Bugs.Add(userProjectRoleRelation);
+            _bugTrackDbContext.Bugs.Add(bug);
             _bugTrackDbContext.SaveChanges();
         }
 

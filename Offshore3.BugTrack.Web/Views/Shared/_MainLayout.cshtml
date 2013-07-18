@@ -32,6 +32,7 @@
 
         h5 {
             float: right;
+            padding-right: 50px;
         }
 
         .ErrorMessage {
@@ -62,7 +63,7 @@
         <div id="header">
             <h1>Welcome to use BugTrack</h1>
 
-            <h5>[<a href="@Url.Action("Profiles", "Users")">@Model.CurrentUserName</a>]&nbsp;<a href="@Url.Action("SignOut", "Account")">Log Out</a></h5>
+            <h5>[<a href="@Url.Action("Profiles", "Account")">@Model.CurrentUserName</a>]&nbsp;<a href="@Url.Action("SignOut", "Account")">LogOut</a></h5>
 
         </div>
         <div id="mainContent">

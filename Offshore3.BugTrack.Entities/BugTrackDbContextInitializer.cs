@@ -42,19 +42,19 @@ namespace Offshore3.BugTrack.Entities
             var bookStore = new Project
                 {
                     ProjectName = "BookStore",
-                    CreateDate = DateTime.Now,
+                    CreateDate = DateTime.Now
                 };
             var musicStore = new Project
                 {
                     ProjectName = "MusicStore",
-                    CreateDate = DateTime.Now,
+                    CreateDate = DateTime.Now
                 };
 
-            var resolved = new BugStatus() { BugStatusName = "Resolved", Project = bookStore,Number = 3};
-            var open = new BugStatus() { BugStatusName = "Open",Project =bookStore,Number = 1};
-            var closed = new BugStatus() {BugStatusName = "Closed",Project = bookStore,Number = 2};
-            var developing = new BugStatus() { BugStatusName = "Developing",Project = bookStore,Number = 4};
-            var reopen = new BugStatus() { BugStatusName = "Reopen",Project = bookStore,Number = 5};
+            var resolved = new BugStatus() { BugStatusName = "Resolved", Project = bookStore,Number = 0};
+            var open = new BugStatus() { BugStatusName = "Open",Project =bookStore,Number = 0};
+            var closed = new BugStatus() {BugStatusName = "Closed",Project = bookStore,Number = 0};
+            var developing = new BugStatus() { BugStatusName = "Developing",Project = bookStore,Number = 0};
+            var reopen = new BugStatus() { BugStatusName = "Reopen",Project = bookStore,Number = 0};
             
 
             var ie6Bug = new Bug()
@@ -123,38 +123,38 @@ namespace Offshore3.BugTrack.Entities
             context.BugComments.Add(comment1);
             context.BugComments.Add(comment2);
 
-            context.RoleRelations.Add(new UserProjectRoleRelation
+            context.UserProjectRoleRelations.Add(new UserProjectRoleRelation
                 {
                     Project = bookStore,
                     User = brain,
                     Role = creator
                 });
 
-            context.RoleRelations.Add(new UserProjectRoleRelation
+            context.UserProjectRoleRelations.Add(new UserProjectRoleRelation
                 {
                     Project = bookStore,
                     User = jack,
                     Role = admin
                 });
-            context.RoleRelations.Add(new UserProjectRoleRelation
+            context.UserProjectRoleRelations.Add(new UserProjectRoleRelation
                 {
                     Project = bookStore,
                     User = tom,
                     Role = participant
                 });
-            context.RoleRelations.Add(new UserProjectRoleRelation
+            context.UserProjectRoleRelations.Add(new UserProjectRoleRelation
                 {
                     Project = musicStore,
                     User = tom,
                     Role = creator
                 });
-            context.RoleRelations.Add(new UserProjectRoleRelation
+            context.UserProjectRoleRelations.Add(new UserProjectRoleRelation
                 {
                     Project = musicStore,
                     User = jack,
                     Role = admin
                 });
-            context.RoleRelations.Add(new UserProjectRoleRelation
+            context.UserProjectRoleRelations.Add(new UserProjectRoleRelation
                 {
                     Project = musicStore,
                     User = brain,

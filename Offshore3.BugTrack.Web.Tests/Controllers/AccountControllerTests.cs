@@ -4,9 +4,9 @@ using Offshore3.BugTrack.Web.Controllers;
 
 namespace Offshore3.BugTrack.Web.Tests.Controllers
 {
-    [TestFixture]
-    public class AccountControllerTests
-    {
+    //[TestFixture]
+    //public class AccountControllerTests
+    //{
     //    private AccountController _accountController;
 
     //    [SetUp]

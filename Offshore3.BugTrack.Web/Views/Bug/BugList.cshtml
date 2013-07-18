@@ -4,7 +4,7 @@
 <div id="EditIssueDiv" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     
 </div>
-<input type="hidden" id="UrlPath" value="@Url.Content("~/Bug/EditIssue")"/>
+<input type="hidden" id="UrlPath" value="@Url.Action("EditIssue","Bug")"/>
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -31,7 +31,7 @@
                 <td>@bugViewModel.Description</td>
                 <td>@bugViewModel.BugStatusName</td>
                 <td>@bugViewModel.CreateDate.ToShortDateString()</td>
-                <td>@bugViewModel.UpdateTime.ToShortTimeString()</td>
+                <td>@bugViewModel.UpdateTime.ToShortDateString()</td>
                 <td>@bugViewModel.AssignerName</td>
             </tr>
         }

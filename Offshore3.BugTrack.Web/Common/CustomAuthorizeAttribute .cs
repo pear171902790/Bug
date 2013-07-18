@@ -10,8 +10,8 @@ namespace Offshore3.BugTrack.Web.Common
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             bool result = false;
-            HttpCookie userCookie = httpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
-            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(userCookie.Value);
+            var userCookie = httpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
+            var ticket = FormsAuthentication.Decrypt(userCookie.Value);
             long userId;
             if ((!string.IsNullOrEmpty(ticket.Name)) && long.TryParse(ticket.Name, out userId))
             {
@@ -26,7 +26,7 @@ namespace Offshore3.BugTrack.Web.Common
             {
                 if (filterContext != null)
                 {
-                    HttpContextBase context = filterContext.HttpContext;
+                    var context = filterContext.HttpContext;
                     if (!AuthorizeCore(context))
                     {
                         filterContext.Result = new RedirectResult(FormsAuthentication.LoginUrl);

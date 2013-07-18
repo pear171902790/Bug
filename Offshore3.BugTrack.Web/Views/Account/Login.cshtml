@@ -13,7 +13,7 @@
         <div class="control-group">
             @Html.LabelFor(m => m.UserNameOrEmail, new { @class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(m => m.UserNameOrEmail, new { placeholder = "UserName" })
+                @Html.TextBoxFor(m => m.UserNameOrEmail, new { placeholder = "Username or Email" })
                 @Html.ValidationMessageFor(m => m.UserNameOrEmail, string.Empty, new { @class = "ErrorMessage" })
             </div>
         </div>

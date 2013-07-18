@@ -10,8 +10,9 @@ namespace Offshore3.BugTrack.IRepository
     public interface IBugStatusRepository
     {
         BugStatus Get(long bugStatusId);
-        BugStatus Get(string bugStatusName);
+        BugStatus Get(string bugStatusName, long projectId);
         void Add(BugStatus bugStatus);
-        void UpdateNumber(string statusName, int number);
+        void UpdateNumber(long statusId, int number);
+        List<BugStatus> GetList(long projectId);
     }
 }

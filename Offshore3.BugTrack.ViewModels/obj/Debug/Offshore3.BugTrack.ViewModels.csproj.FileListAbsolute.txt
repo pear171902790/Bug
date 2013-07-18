@@ -48,3 +48,12 @@ F:\Bug\Offshore3.BugTrack.ViewModels\bin\Debug\EntityFramework.xml
 F:\Bug\Offshore3.BugTrack.ViewModels\obj\Debug\Offshore3.BugTrack.ViewModels.csprojResolveAssemblyReference.cache
 F:\Bug\Offshore3.BugTrack.ViewModels\obj\Debug\Offshore3.BugTrack.ViewModels.dll
 F:\Bug\Offshore3.BugTrack.ViewModels\obj\Debug\Offshore3.BugTrack.ViewModels.pdb
+E:\Bug\Offshore3.BugTrack.ViewModels\bin\Debug\Offshore3.BugTrack.ViewModels.dll
+E:\Bug\Offshore3.BugTrack.ViewModels\bin\Debug\Offshore3.BugTrack.ViewModels.pdb
+E:\Bug\Offshore3.BugTrack.ViewModels\bin\Debug\Offshore3.BugTrack.Entities.dll
+E:\Bug\Offshore3.BugTrack.ViewModels\bin\Debug\EntityFramework.dll
+E:\Bug\Offshore3.BugTrack.ViewModels\bin\Debug\Offshore3.BugTrack.Entities.pdb
+E:\Bug\Offshore3.BugTrack.ViewModels\bin\Debug\EntityFramework.xml
+E:\Bug\Offshore3.BugTrack.ViewModels\obj\Debug\Offshore3.BugTrack.ViewModels.csprojResolveAssemblyReference.cache
+E:\Bug\Offshore3.BugTrack.ViewModels\obj\Debug\Offshore3.BugTrack.ViewModels.dll
+E:\Bug\Offshore3.BugTrack.ViewModels\obj\Debug\Offshore3.BugTrack.ViewModels.pdb

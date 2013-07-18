@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BugCommentLogic.cs" />
     <Compile Include="BugLogic.cs" />
     <Compile Include="BugStatusLogic.cs">
       <SubType>Code</SubType>
@@ -67,10 +68,6 @@
     <ProjectReference Include="..\Offshore3.BugTrack.IRepository\Offshore3.BugTrack.IRepository.csproj">
       <Project>{CBE65791-5E8B-4B2E-8160-7D3E7EC828C6}</Project>
       <Name>Offshore3.BugTrack.IRepository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Offshore3.BugTrack.Models\Offshore3.BugTrack.Models.csproj">
-      <Project>{EDB36274-2D05-401A-A8C4-F63A090E9BC2}</Project>
-      <Name>Offshore3.BugTrack.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Offshore3.BugTrack.ViewModels\Offshore3.BugTrack.ViewModels.csproj">
       <Project>{6a9a3bca-cf53-48c1-8c56-777d256ad66c}</Project>

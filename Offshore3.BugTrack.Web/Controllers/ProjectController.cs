@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using Offshore3.BugTrack.Common;
 using Offshore3.BugTrack.Entities;
 using Offshore3.BugTrack.ILogic;
-using Offshore3.BugTrack.Models;
 using Offshore3.BugTrack.ViewModels;
 using Offshore3.BugTrack.Web.Common;
 

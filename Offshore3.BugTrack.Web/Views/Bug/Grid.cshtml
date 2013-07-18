@@ -23,6 +23,7 @@
         var url = $('#BugListUrl').val();
         $('#gridBar').load(url + '?projectId=@Model&count=' + count+'&page=1');
     });
+    
     $('#btnSearch').bind('click', function () {
         var keyword = $('#txtKeyword').val();
         if (keyword == '') {

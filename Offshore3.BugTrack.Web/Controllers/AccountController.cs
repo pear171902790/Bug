@@ -20,16 +20,20 @@ namespace Offshore3.BugTrack.Web.Controllers
             _cookieHelper = cookieHelper;
         }
 
-        //public ActionResult Index()
-        //{
-        //    ViewBag.UserName = _userLogic.Get(1).UserName;
-        //    return View();
-        //}
+        public ActionResult Init()
+        {
+            var initViewModel=new InitViewModel
+                {
+                        UserName = _userLogic.Get(1).UserName
+                };
+            return View(initViewModel);
+        }
 
         [HttpGet]
         public ActionResult Login() 
         {
-            return View();
+            var loginViewModel=new LoginViewModel();
+            return View(loginViewModel);
         }
 
         [HttpPost]
@@ -41,7 +45,7 @@ namespace Offshore3.BugTrack.Web.Controllers
                     {
                         Email = loginViewModel.UserNameOrEmail,
                         Password = loginViewModel.Password,
-                         UserName= loginViewModel.UserNameOrEmail
+                        UserName= loginViewModel.UserNameOrEmail
                     };
                 var result = _userLogic.AuthenticateUser(user);
                 if (result)
@@ -51,7 +55,7 @@ namespace Offshore3.BugTrack.Web.Controllers
                     _cookieHelper.SetAuthCookie(Convert.ToString(user.UserId), false);
                     return new RedirectResult(Url.Action("Index", "Project"));
                 }
-                loginViewModel.PromptInfo = "username or password is error";
+                loginViewModel.PromptInfo = "Incorrect username or password.";
                 return View(loginViewModel);
             }
             catch (Exception)
@@ -63,7 +67,8 @@ namespace Offshore3.BugTrack.Web.Controllers
         [HttpGet]
         public ActionResult Register() 
         {
-            return View();
+            var registerViewModel=new RegisterViewModel();
+            return View(registerViewModel);
         }
 
         [HttpPost]
@@ -110,8 +115,12 @@ namespace Offshore3.BugTrack.Web.Controllers
         {
             try
             {
+
                 var userId = _cookieHelper.GetUserId(Request);
-                var user = _userLogic.GetByUserName(userId);
+                var user = _userLogic.Get(userId);
+                var webPath = string.Format("{0}{1}.jpg", UserConfig.UserImageUrl, userId);
+                var ioPath = Server.MapPath(webPath);
+                var imageUrl = System.IO.File.Exists(ioPath) ? webPath : string.Empty;
                 var profileViewModel = new ProfileViewModel
                 {
                     UserName = user.UserName,
@@ -121,7 +130,7 @@ namespace Offshore3.BugTrack.Web.Controllers
                     Gender = user.Gender,
                     Introduction = user.Introduction,
                     CurrentUserName = user.UserName,
-                    ImageUrl = string.Format("{0}{1}.jpg", UserConfig.UserImageUrl, userId)
+                    ImageUrl = imageUrl
                 };
                 return View(profileViewModel);
             }

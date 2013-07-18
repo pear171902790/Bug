@@ -11,10 +11,10 @@ namespace Offshore3.BugTrack.Entities
         public virtual long BugCommentId { get; set; }
         public virtual string Content { get; set; }
         public virtual DateTime AddTime { get; set; }
+        public string Commentator { get; set; }
 
         public virtual long BugId { get; set; }
         public virtual Bug Bug { get; set; }
-        public string  Commentator { get; set; }
 
     }
 }

@@ -1,20 +1,20 @@
-﻿@model Offshore3.BugTrack.ViewModels.AddEditIssueViewModel
+﻿@model Offshore3.BugTrack.ViewModels.AddEditBugViewModel
 
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<form class="form-horizontal">
+<form class="form-horizontal" id="EditForm">
     <input type="hidden" name="ProjectId" value="@Model.ProjectId"/>
-    <input type="hidden" name="BugId" value="@Model.IssueViewModel.BugId">
+    <input type="hidden" name="BugId" value="@Model.BugViewModel.BugId">
     <div class="control-group">
         <label class="control-label">Name:</label>
         <div class="controls">
-            <input type="text" id="EditBugName" name="BugName" value="@Model.IssueViewModel.BugName"/>
+            <input type="text" id="EditBugName" name="BugName" value="@Model.BugViewModel.BugName"/>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">Description:</label>
         <div class="controls">
-            <textarea name="Description" id="txtDescription">
-                @Model.IssueViewModel.Description
+            <textarea name="Description" id="EdittxtDescription">
+                @Model.BugViewModel.Description
             </textarea>
         </div>
     </div>
@@ -22,50 +22,52 @@
     <hr />
 
     <div class="control-group">
-        <label class="control-label"><a href="#" id="btnUp">Upload Attachment</a></label>
-        <div class="controls" id="divUpload">
-            @Html.Action("BugAttachments", "Bug", new {bugId = Model.IssueViewModel.BugId})
+        <label class="control-label"><a href="#" id="EditbtnUp">Upload Attachment</a></label>
+        <div class="controls" id="EditdivUpload">
+            @Html.Action("BugAttachments", "Bug", new { bugId = Model.BugViewModel.BugId })
         </div>
     </div>
-    
-    <hr/>
-    
+
+    <hr />
+
     <div class="control-group">
         <label class="control-label">Status:</label>
         <div class="controls">
-            <input type="text" name="BugStatusName" id="BugStatusName" value="@Model.IssueViewModel.BugStatusName"/>
+            <input type="text" name="BugStatusName" id="EditBugStatusName" value="@Model.BugViewModel.BugStatusName"/>
             @if (Model.BugStatusNames.Count > 0)
             {
-                <select id="selStatuses">
-                @foreach (string s in Model.BugStatusNames)
-                {
-                    if (Model.IssueViewModel != null && s == Model.IssueViewModel.BugStatusName)
+                <select id="EditselStatuses">
+                    @foreach (var s in Model.BugStatusNames)
                     {
+                        if (Model.BugViewModel != null && s == Model.BugViewModel.BugStatusName)
+                        {
                         <option value="@s" selected="selected">@s</option>
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
                         <option value="@s">@s</option>
+                        }
                     }
-                }
                 </select>
             }
+
         </div>
+
     </div>
-    
+
     <div class="control-group">
         <label class="control-label">Assign to:</label>
         <div class="controls">
-            <select id="selAssigner" name="AssignerId">
+            <select id="EditselAssigner" name="AssignerId">
                 @foreach (var m in Model.Members)
                 {
-                    if (Model.IssueViewModel != null && m.Key == Model.IssueViewModel.AssignerId)
+                    if (Model.BugViewModel != null && m.Key == Model.BugViewModel.AssignerId)
                     {
-                        <option value="@m.Key" selected="selected">@m.Value</option>
+                    <option value="@m.Key" selected="selected">@m.Value</option>
                     }
                     else
                     {
-                        <option value="@m.Key">@m.Value</option>
+                    <option value="@m.Key">@m.Value</option>
                     }
                 }
             </select>
@@ -77,7 +79,7 @@
         <label class="control-label">Bug Comments</label>
         <div class="controls">
             <div id="divComments">
-                @Html.Action("Comments", "Bug", new {bugId = Model.IssueViewModel.BugId})
+                @Html.Action("Comments", "Bug", new { bugId = Model.BugViewModel.BugId })
             </div>
             <textarea id="txtContent">
 
@@ -90,55 +92,61 @@
     <hr />
 
     <div>
-        <a class="btn lBtn" id="btnSave">Save</a>
+        <a class="btn lBtn" id="EditbtnSave">Save</a>
         <button class="btn rBtn" data-dismiss="modal" aria-hidden="true">Cancel</button>
     </div>
 </form>
 <style>
-    .lBtn { margin-left: 150px; }
+    .lBtn {
+        margin-left: 150px;
+    }
 
-    .rBtn { margin-left: 100px; }
+    .rBtn {
+        margin-left: 100px;
+    }
 
-    #EditIssueForm { margin-top: 50px; }
+    #EditForm {
+        margin-top: 50px;
+    }
 </style>
 
 <script>
-    $('#selStatuses').bind('change', function () {
-        $('#BugStatusName').val($('#selStatuses').val());
+    $('#EditselStatuses').bind('change', function () {
+        $('#EditBugStatusName').val($('#EditselStatuses').val());
     });
-    var commentUrl = '@Url.Action("BugAttachments", "Bug", new {bugId = Model.IssueViewModel.BugId})';
-    $(function() {
-        new AjaxUpload($('#btnUp'), {
-            action: '@Url.Action("BugAttachment", "Upload", new {bugId = Model.IssueViewModel.BugId})',
+    $(function () {
+        new AjaxUpload($('#EditbtnUp'), {
+            action: '@Url.Action("BugAttachment", "Upload", new { bugId = Model.BugViewModel.BugId })',
             name: 'BugAttachment',
             type: 'POST',
             responseType: 'json',
             autoSubmit: true,
-            onChange: function(file, ext) {
+            onChange: function (file, ext) {
                 if (!(ext && /^(jpg|jpeg|JPG|JPEG|doc|docx|pdf|txt|xls|ppt)$/.test(ext))) {
                     alert('format error!', 'system');
                     return false;
                 }
             },
-            onComplete: function(file, response) {
+            onComplete: function (file, response) {
                 if (response.Status) {
-                    $('#divUpload').load('@Url.Action("BugAttachments", "Bug", new {bugId = Model.IssueViewModel.BugId})');
+                    $('#EditdivUpload').load('@Url.Action("BugAttachments", "Bug", new { bugId = Model.BugViewModel.BugId })');
                 }
             }
         });
-        $('#btnAddComment').bind('click', function () {
-            if ($('#txtContent').val() == '') {
-                return false;
-            }
-            $.ajax({
-                url: '@Url.Action("AddComment","Bug")',
+    });
+    $('#btnAddComment').bind('click', function () {
+        if ($('#txtContent').val() == '') {
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("AddComment", "Bug")',
                 type: 'post',
-                data: { content: $('#txtContent').val(), bugId:'@Model.IssueViewModel.BugId'},
+                data: { content: $('#txtContent').val(), bugId: '@Model.BugViewModel.BugId' },
                 dataType: 'json',
                 async: false,
                 success: function (result) {
                     if (result.Status) {
-                        $('#divComments').load('@Url.Action("Comments", "Bug", new {bugId = Model.IssueViewModel.BugId})');
+                        $('#divComments').load('@Url.Action("Comments", "Bug", new { bugId = Model.BugViewModel.BugId })');
                         $('#txtContent').val('');
                     } else {
                         alert('add comment failed');
@@ -146,29 +154,30 @@
                 }
             });
         });
-        $('#btnSave').bind('click', function () {
+        $('#EditbtnSave').bind('click', function () {
             if ($('#EditBugName').val() == '') {
                 alert('Bug name is required');
                 $('#EditBugName').focus();
                 return false;
             }
             $.ajax({
-                url: '@Url.Action("EditIssue","Bug")',
+                url: '@Url.Action("EditIssue", "Bug")',
                 type: 'post',
-                data: $('form').serializeJson(),
+                data: $('#EditForm').serializeJson(),
                 dataType: 'json',
                 async: false,
                 success: function (result) {
                     if (result.Status) {
                         $('#EditIssueDiv').modal('hide');
-                        $('#mainBody').load('@Url.Action("Grid", "Bug", new {projectId = Model.ProjectId})');
+                        $('#mainBody').load('@Url.Action("Grid", "Bug", new { projectId = Model.ProjectId })');
                     } else {
                         alert('save failed,Please try again');
                     }
                 }
             });
         });
-    });
+
+       
 </script>
 <style>
     

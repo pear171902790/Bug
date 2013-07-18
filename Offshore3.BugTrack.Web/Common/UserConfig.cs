@@ -11,11 +11,7 @@ namespace Offshore3.BugTrack.Web.Common
     {
         public static string UserImageUrl
         {
-            get
-            {
-                var dict = ConfigurationManager.GetSection("UserImageUrl") as IDictionary;
-                return dict["url"].ToString();
-            }
+            get { return "~/Content/UserImages/"; }
         }
 
         public static string InitialPassword

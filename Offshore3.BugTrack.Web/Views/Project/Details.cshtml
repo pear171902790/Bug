@@ -5,7 +5,7 @@
     <a href="#" id="Settings">Settings</a>&nbsp;|&nbsp;<a href="#" id="Issues">Issues</a>
 </div>
 <div id="mainArea">
-    @Html.Action("Settings","Project",new {projectId=Model.ProjectId});
+    @Html.Action("Settings","Project",new {projectId=Model.ProjectId})
 </div>
 <script>
     $('#Settings').bind('click', function () {

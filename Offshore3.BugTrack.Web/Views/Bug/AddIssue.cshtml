@@ -1,12 +1,12 @@
-﻿@model Offshore3.BugTrack.ViewModels.AddEditIssueViewModel
+﻿@model Offshore3.BugTrack.ViewModels.AddEditBugViewModel
 
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<form class="form-horizontal">
+<form class="form-horizontal" id="AddForm">
     <input type="hidden" name="ProjectId" value="@Model.ProjectId"/>
     <div class="control-group">
         <label class="control-label">Name:</label>
         <div class="controls">
-            <input type="text" id="EditBugName" name="BugName"/>
+            <input type="text" id="AddBugName" name="BugName"/>
         </div>
     </div>
     <div class="control-group">
@@ -68,7 +68,7 @@
 
     .rBtn { margin-left: 100px; }
 
-    #AddIssueForm { margin-top: 50px; }
+    #AddForm { margin-top: 50px; }
 </style>
 <script>
     $(function() {
@@ -90,10 +90,11 @@
                 }
             }
         });
-
-    $('#selStatuses').bind('change', function() {
+    });
+    $('#selStatuses').bind('change', function () {
         $('#BugStatusName').val($('#selStatuses').val());
     });
+   
     $('#btnSave').bind('click', function () {
         if ($('#AddBugName').val() == '') {
             alert('Bug name is required');
@@ -103,7 +104,7 @@
         $.ajax({
             url: '@Url.Action("AddIssue", "Bug")',
             type: 'post',
-            data: $('form').serializeJson(),
+            data: $('#AddForm').serializeJson(),
             dataType: 'json',
             async: false,
             success: function (result) {
