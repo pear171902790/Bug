@@ -1586,7 +1586,6 @@
     <Content Include="Views\Project\MemberManager.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\MemberList.cshtml" />
-    <Content Include="Views\Account\Init.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Bug\Issues.cshtml" />
     <Content Include="Views\Bug\Grid.cshtml" />

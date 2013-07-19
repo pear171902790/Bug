@@ -44,7 +44,7 @@ namespace Offshore3.BugTrack.Web.Controllers
         public ActionResult BugAttachment(long bugId)
         {
             var userId = _cookieHelper.GetUserId(Request);
-            var folderName = bugId == 0 ? userId+"_temp":userId+"_"+bugId;
+            var folderName = bugId == 0 ? userId + "_temp" : Convert.ToString(bugId);
             HttpPostedFileBase httpPostedFile = Request.Files["BugAttachment"];
             var fileName = System.IO.Path.GetFileName(httpPostedFile.FileName);
             var directoryPath = Server.MapPath(Url.Content("~/Content/BugAttachments/" + folderName));

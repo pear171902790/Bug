@@ -11,7 +11,6 @@
 </div>
 
 <div id="AddIssueDiv" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    @Html.Action("AddIssue", "Bug", new { projectId = Model })
 </div>
 <div id="mainBody">
     @Html.Action("Grid", "Bug", new {projectId = Model})
@@ -24,7 +23,10 @@
     $('#Board').bind('click', function () {
         $('#mainBody').load('@Url.Action("Board", "Bug", new {projectId = Model})');
     });
-   
+    $('#spanAddIssue').bind('click', function() {
+        $('#AddIssueDiv').html('');
+        $('#AddIssueDiv').load('@Url.Action("AddIssue", "Bug", new { projectId = Model })');
+    });
 </script>
 
 <style>

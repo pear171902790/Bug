@@ -21,7 +21,7 @@ namespace Offshore3.BugTrack.Repository
 
         public List<BugComment> GetByBugId(long bugId)
         {
-            return _bugTrackDbContext.BugComments.Where(c => c.BugId == bugId).ToList();
+            return _bugTrackDbContext.BugComments.Where(c => c.BugId == bugId).OrderByDescending(c=>c.AddTime).ToList();
         }
     }
 }

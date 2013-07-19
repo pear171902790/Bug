@@ -15,7 +15,7 @@ namespace Offshore3.BugTrack.IRepository
         List<Bug> GetBugs(List<long> statusIds, int count,int page,string kw);
         void Update(Bug bug);
         List<Bug> GetList(long bugStatusId);
-        Bug Get(string bugName, DateTime createDate);
+        Bug Get(string bugName, Guid sole);
         Bug Get(long bugId);
     }
 }

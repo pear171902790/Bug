@@ -85,11 +85,12 @@ namespace Offshore3.BugTrack.Web.Controllers
                 {
                     ProjectName = createProjectViewModel.ProjectName,
                     Description = createProjectViewModel.Description,
-                    CreateDate = DateTime.Now
+                    CreateDate = DateTime.Now,
+                    Sole = Guid.NewGuid()
                 };
                 var userId = _cookieHelper.GetUserId(Request);
                 _projectLogic.CreateProject(project);
-                var projectId = _projectLogic.Get(project.ProjectName,project.CreateDate).ProjectId;
+                var projectId = _projectLogic.Get(project.ProjectName,project.Sole).ProjectId;
                 var userProjectRoleRelation=new UserProjectRoleRelation
                     {
                         ProjectId = projectId,

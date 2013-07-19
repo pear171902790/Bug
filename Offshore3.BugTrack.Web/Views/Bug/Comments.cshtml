@@ -7,13 +7,15 @@
     <br/>
     <span class="addInfo">
         @c.Commentator 
-        <span>Added</span> 
+        <span id="time">
         @Convert.ToString(c.AddTime)
+            </span>
     </span>
     <br/>
 }
 
 
 <style>
-    .addInfo{ font-size: 10px;padding-left: 20px;}
+    #time{ margin-left: 10px;}
+    .addInfo{ font-size: 10px;color: blue;padding-right: 20px;float: right;}
 </style>

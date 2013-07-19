@@ -60,11 +60,11 @@ namespace Offshore3.BugTrack.Logic
             _bugRepository.Update(bug);
         }
 
-       
 
-        public Bug Get(string bugName, DateTime createDate)
+
+        public Bug Get(string bugName, Guid sole)
         {
-            return _bugRepository.Get(bugName, createDate);
+            return _bugRepository.Get(bugName, sole);
         }
 
         public List<Bug> GetList(long bugStatusId)

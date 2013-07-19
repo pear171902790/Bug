@@ -151,15 +151,19 @@ namespace Offshore3.BugTrack.Web.Controllers
                         UserId = bugViewModel.AssignerId,
                         BugStatusId = bugStatus.BugStatusId,
                         CreateDate = DateTime.Now,
-                        UpdateTime = DateTime.Now
+                        UpdateTime = DateTime.Now,
+                        Sole = Guid.NewGuid()
                     };
                 _bugLogic.Add(bug);
-                var bugId = _bugLogic.Get(bug.BugName, bug.CreateDate).BugId;
+                var bugId = _bugLogic.Get(bug.BugName, bug.Sole).BugId;
                 var userId = _cookieHelper.GetUserId(Request);
                 var ioPath = Server.MapPath(Url.Content("~/Content/BugAttachments/"));
-                var bugAttachmentsPath = ioPath + userId + "_" + bugId;
+                var bugAttachmentsPath = ioPath + bugId;
                 var tempPath = ioPath + userId + "_temp";
-                System.IO.Directory.Move(tempPath,bugAttachmentsPath);
+                if (System.IO.Directory.Exists(tempPath))
+                {
+                    System.IO.Directory.Move(tempPath, bugAttachmentsPath);
+                }
                 json.Data = new { Status = true };
             }
             catch
@@ -258,7 +262,7 @@ namespace Offshore3.BugTrack.Web.Controllers
         public ActionResult BugAttachments(long bugId)
         {
             var userId = _cookieHelper.GetUserId(Request);
-            var folderName = bugId == 0 ? userId + "_temp" : userId + "_" + bugId;
+            var folderName = bugId == 0 ? userId + "_temp" : Convert.ToString(bugId);
             var path = Server.MapPath("~/Content/BugAttachments/" + folderName);
             var attachmentNames = new List<string>();
             if (System.IO.Directory.Exists(path))

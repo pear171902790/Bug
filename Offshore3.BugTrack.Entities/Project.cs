@@ -12,6 +12,7 @@ namespace Offshore3.BugTrack.Entities
         public virtual string ProjectName { get; set; }
         public virtual DateTime CreateDate { get; set; }
         public virtual string Description { get; set; }
+        public virtual Guid Sole { get; set; }
 
         public virtual List<BugStatus> BugStatuses { get; set; }
         public virtual List<UserProjectRoleRelation> UserProjectRoleRelations { get; set; }

@@ -20,19 +20,13 @@ namespace Offshore3.BugTrack.Web.Controllers
             _cookieHelper = cookieHelper;
         }
 
-        public ActionResult Init()
-        {
-            var initViewModel=new InitViewModel
-                {
-                        UserName = _userLogic.Get(1).UserName
-                };
-            return View(initViewModel);
-        }
-
         [HttpGet]
         public ActionResult Login() 
         {
-            var loginViewModel=new LoginViewModel();
+            //for init Data
+            var name = _userLogic.Get(1).UserName;
+
+            var loginViewModel = new LoginViewModel();
             return View(loginViewModel);
         }
 

@@ -67,9 +67,9 @@ namespace Offshore3.BugTrack.Repository
                 ).ToList();
         }
 
-        public Bug Get(string bugName, DateTime createDate)
+        public Bug Get(string bugName, Guid sole)
         {
-            return _bugTrackDbContext.Bugs.SingleOrDefault(b => b.BugName == bugName&&b.CreateDate==createDate);
+            return _bugTrackDbContext.Bugs.SingleOrDefault(b => b.BugName == bugName&&b.Sole==sole);
         }
 
         public Bug Get(long bugId)

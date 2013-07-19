@@ -4,7 +4,11 @@
 {
     foreach(var s in Model.AttachmentNames)
     {
-        <a href="@Url.Action("DownloadAttachment","Download",new{bugId=Model.BugId,name=s})">@s</a>
-        <br />
+        <a href="@Url.Action("DownloadAttachment","Download",new{bugId=Model.BugId,name=s})" class="Attachment">@s</a>
     }
 }
+<style>
+    .Attachment {
+        margin-left: 10px;float: left;
+    }
+</style>

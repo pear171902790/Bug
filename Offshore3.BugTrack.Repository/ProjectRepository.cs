@@ -41,11 +41,11 @@ namespace Offshore3.BugTrack.Repository
             _bugTrackDbContext.SaveChanges();
         }
 
-        public Project Get(string projectName, DateTime createDate)
+        public Project Get(string projectName, Guid sole)
         {
             return
                 _bugTrackDbContext.Projects.SingleOrDefault(
-                    p => p.ProjectName == projectName&&p.CreateDate==createDate);
+                    p => p.ProjectName == projectName && p.Sole==sole);
         }
 
         public void Update(Project project)

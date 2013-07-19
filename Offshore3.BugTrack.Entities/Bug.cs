@@ -13,7 +13,7 @@ namespace Offshore3.BugTrack.Entities
         public string Description { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateTime { get; set; }
-
+        public Guid Sole { get; set; }
         public long BugStatusId { get; set; }
         public BugStatus BugStatus { get; set; }
 

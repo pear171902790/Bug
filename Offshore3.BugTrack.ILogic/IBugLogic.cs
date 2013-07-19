@@ -11,7 +11,7 @@ namespace Offshore3.BugTrack.ILogic
         void Add(Bug bug);
         List<Bug> GetBugs(List<long> statusIds, int count, int page, string kw);
         void Update(Bug bug);
-        Bug Get(string bugName, DateTime createDate);
+        Bug Get(string bugName, Guid sole);
         List<Bug> GetList(long bugStatusId);
     }
 }

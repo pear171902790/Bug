@@ -23,7 +23,7 @@
 
     <div class="control-group">
         <label class="control-label"><a href="#" id="EditbtnUp">Upload Attachment</a></label>
-        <div class="controls" id="EditdivUpload">
+        <div class="controls" id="EditdivUpload" style="overflow-y:auto;height: 50px;">
             @Html.Action("BugAttachments", "Bug", new { bugId = Model.BugViewModel.BugId })
         </div>
     </div>
@@ -111,6 +111,13 @@
 </style>
 
 <script>
+    function AutoAddScroll() {
+        var height = $('#divComments').height();
+        if (height > 100) {
+            $('#divComments').css({ 'overflow-y': 'scroll', 'height': '100px' });
+        }
+    }
+    AutoAddScroll();
     $('#EditselStatuses').bind('change', function () {
         $('#EditBugStatusName').val($('#EditselStatuses').val());
     });
@@ -140,45 +147,48 @@
         }
         $.ajax({
             url: '@Url.Action("AddComment", "Bug")',
-                type: 'post',
-                data: { content: $('#txtContent').val(), bugId: '@Model.BugViewModel.BugId' },
-                dataType: 'json',
-                async: false,
-                success: function (result) {
-                    if (result.Status) {
-                        $('#divComments').load('@Url.Action("Comments", "Bug", new { bugId = Model.BugViewModel.BugId })');
-                        $('#txtContent').val('');
-                    } else {
-                        alert('add comment failed');
-                    }
+            type: 'post',
+            data: { content: $('#txtContent').val(), bugId: '@Model.BugViewModel.BugId' },
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                if (result.Status) {
+                    $('#divComments').load('@Url.Action("Comments", "Bug", new { bugId = Model.BugViewModel.BugId })');
+                    AutoAddScroll();
+                    $('#txtContent').val('');
+                } else {
+                    alert('add comment failed');
                 }
-            });
-        });
-        $('#EditbtnSave').bind('click', function () {
-            if ($('#EditBugName').val() == '') {
-                alert('Bug name is required');
-                $('#EditBugName').focus();
-                return false;
             }
-            $.ajax({
-                url: '@Url.Action("EditIssue", "Bug")',
-                type: 'post',
-                data: $('#EditForm').serializeJson(),
-                dataType: 'json',
-                async: false,
-                success: function (result) {
-                    if (result.Status) {
-                        $('#EditIssueDiv').modal('hide');
-                        $('#mainBody').load('@Url.Action("Grid", "Bug", new { projectId = Model.ProjectId })');
-                    } else {
-                        alert('save failed,Please try again');
-                    }
-                }
-            });
         });
+    });
+    $('#EditbtnSave').bind('click', function () {
+        if ($('#EditBugName').val() == '') {
+            alert('Bug name is required');
+            $('#EditBugName').focus();
+            return false;
+        }
+        if ($('#EditBugStatusName').val() == '') {
+            alert('Status is required');
+            $('#EditBugStatusName').focus();
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("EditIssue", "Bug")',
+            type: 'post',
+            data: $('#EditForm').serializeJson(),
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                if (result.Status) {
+                    $('#EditIssueDiv').modal('hide');
+                    $('#mainBody').load('@Url.Action("Grid", "Bug", new { projectId = Model.ProjectId })');
+                } else {
+                    alert('save failed,Please try again');
+                }
+            }
+        });
+    });
 
-       
 </script>
-<style>
-    
-</style>
+\

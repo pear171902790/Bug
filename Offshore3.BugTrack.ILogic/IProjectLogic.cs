@@ -8,7 +8,7 @@ namespace Offshore3.BugTrack.ILogic
         void Update(Project project);
         Project Get(long projectId);
         void CreateProject(Project project);
-        Project Get(string projectName,DateTime createDate);
+        Project Get(string projectName, Guid sole);
         void Delete(long projectId);
     }
 }

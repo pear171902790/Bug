@@ -31,9 +31,9 @@ namespace Offshore3.BugTrack.Logic
             _projectRepository.Add(project);
         }
 
-        public Project Get(string projectName, DateTime createDate)
+        public Project Get(string projectName, Guid sole)
         {
-            return _projectRepository.Get(projectName,createDate);
+            return _projectRepository.Get(projectName, sole);
         }
 
         public void Delete(long projectId)
